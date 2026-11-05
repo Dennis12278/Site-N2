@@ -1,0 +1,274 @@
+<div class="criar-publicacao-page">
+
+    <main class="criar-publicacao-content">
+
+        <div class="cabecalho">
+
+            <button
+                type="button"
+                class="botao-voltar"
+                (click)="voltar()"
+            >
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </button>
+
+            <div>
+                <h1>{{ modoEdicao ? 'Editar publicação' : 'Criar publicação' }}</h1>
+
+                <p>
+                    {{ modoEdicao ? 'Altere os dados, a visibilidade ou a capa da publicação.' : 'Crie um novo título para compartilhar no DREAM.' }}
+                </p>
+            </div>
+
+        </div>
+
+        <section class="formulario">
+
+            <div class="campo">
+
+                <label for="titulo">
+                    Título
+                </label>
+
+                <input
+                    id="titulo"
+                    type="text"
+                    [(ngModel)]="titulo"
+                    placeholder="Digite o título da publicação..."
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                    id="descricao"
+                    [(ngModel)]="descricao"
+                    placeholder="Descreva brevemente este título..."
+                    rows="5"
+                ></textarea>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    Visibilidade
+                </label>
+
+                <div class="visibilidade-opcoes">
+
+                    <label class="opcao-visibilidade">
+
+                        <input
+                            type="radio"
+                            name="visibilidade"
+                            value="publica"
+                            [(ngModel)]="visibilidade"
+                        >
+
+                        <div class="texto-visibilidade">
+
+                            <strong>
+                                Pública
+                            </strong>
+
+                            <span>
+                                Qualquer pessoa pode visualizar.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="opcao-visibilidade">
+
+                        <input
+                            type="radio"
+                            name="visibilidade"
+                            value="privada"
+                            [(ngModel)]="visibilidade"
+                        >
+
+                        <div class="texto-visibilidade">
+
+                            <strong>
+                                Privada
+                            </strong>
+
+                            <span>
+                                Somente você pode visualizar.
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    Arquivo
+                </label>
+
+                <label class="arquivo-area">
+
+                    <i class="bi bi-cloud-arrow-up"></i>
+
+                    <strong>
+                        Escolher arquivo
+                    </strong>
+
+                    <span>
+                        Selecione o arquivo da publicação
+                    </span>
+
+                    <input
+                        type="file"
+                        (change)="selecionarArquivo($event)"
+                    >
+
+                </label>
+
+
+                <div
+                    class="arquivo-selecionado"
+                    *ngIf="arquivoSelecionado"
+                >
+
+                    <i class="bi bi-file-earmark-text"></i>
+
+                    <span>
+                        {{ arquivoSelecionado.name }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    Capa
+                </label>
+
+                <p class="explicacao-capa">
+                    A página inicial do arquivo será usada como capa.
+                </p>
+
+
+                <div class="capa-area">
+
+                    <div class="capa-preview">
+
+                        <img
+                            *ngIf="capaPreview"
+                            [src]="capaPreview"
+                            alt="Prévia da capa"
+                        >
+
+
+                        <div
+                            class="capa-padrao"
+                            *ngIf="!capaPreview"
+                        >
+
+                            <i class="bi bi-file-earmark"></i>
+
+                            <span>
+                                Página inicial
+                            </span>
+
+                            <small>
+                                do arquivo
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="capa-acoes">
+
+                        <label class="botao-capa">
+
+                            <i class="bi bi-plus-lg"></i>
+
+                            Escolher capa
+
+                            <input
+                                type="file"
+                                accept="image/*"
+                                (change)="escolherCapa($event)"
+                            >
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="botao-remover"
+                            *ngIf="capaSelecionada"
+                            (click)="removerCapaEscolhida()"
+                        >
+                            Usar página inicial
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="botao-remover"
+                            *ngIf="modoEdicao && capaAtual && !removerCapa && !capaSelecionada"
+                            (click)="removerCapaAtual()"
+                        >
+                            Remover capa atual
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="acoes">
+
+                <button
+                    type="button"
+                    class="botao-cancelar"
+                    (click)="voltar()"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="button"
+                    class="botao-publicar"
+                    [disabled]="enviando"
+                    (click)="publicar()"
+                >
+                    <i class="bi bi-send"></i>
+                    {{ enviando ? (modoEdicao ? 'Salvando...' : 'Publicando...') : (modoEdicao ? 'Salvar alterações' : 'Publicar') }}
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>

@@ -1,0 +1,48 @@
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-topo">
+            <i class="bi bi-book"></i>
+            <h1>DREAM</h1>
+            <p>
+                {{ modoCadastro ? 'Crie sua conta' : 'Entre na sua conta' }}
+            </p>
+        </div>
+
+
+        <form class="login-form" (ngSubmit)="enviar()">
+
+            <div class="campo-login" *ngIf="modoCadastro">
+                <label for="nome">Nome</label>
+                <input id="nome" type="text" name="nome" [(ngModel)]="nome" placeholder="Seu nome">
+            </div>
+
+            <div class="campo-login">
+                <label for="email">E-mail</label>
+                <input id="email" type="email" name="email" [(ngModel)]="email" placeholder="seu@email.com">
+            </div>
+
+            <div class="campo-login">
+                <label for="senha">Senha</label>
+                <input id="senha" type="password" name="senha" [(ngModel)]="senha" placeholder="Mínimo 6 caracteres">
+            </div>
+
+            <p class="erro-login" *ngIf="erro">
+                {{ erro }}
+            </p>
+
+            <button type="submit" class="botao-login" [disabled]="enviando">
+                {{ enviando ? 'Aguarde...' : (modoCadastro ? 'Criar conta' : 'Entrar') }}
+            </button>
+
+        </form>
+
+
+        <button type="button" class="botao-alternar" (click)="alternarModo()">
+            {{ modoCadastro ? 'Já tenho conta. Entrar' : 'Não tenho conta. Criar agora' }}
+        </button>
+
+    </div>
+
+</div>

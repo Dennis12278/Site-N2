@@ -1,0 +1,139 @@
+<div class="notificacoes-page">
+
+    <!-- =========================================
+         MENU LATERAL
+    ========================================== -->
+
+    <app-sidebar></app-sidebar>
+
+
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================== -->
+
+    <main class="notificacoes-content">
+
+        <!-- =====================================
+             CABEÇALHO
+        ====================================== -->
+
+        <div class="cabecalho-notificacoes">
+
+            <div>
+
+                <h1>
+                    Notificações
+                </h1>
+
+                <p>
+                    Veja as notificações e atualizações da sua conta no DREAM.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ABAS
+        ====================================== -->
+
+        <div class="abas-notificacoes">
+
+            <button
+                type="button"
+                class="aba-notificacao ativa"
+            >
+                Notificações
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             LISTA DE NOTIFICAÇÕES
+        ====================================== -->
+
+        <div class="lista-notificacoes">
+
+            <!-- NOTIFICAÇÃO -->
+
+            <div
+                class="notificacao-card"
+                *ngFor="let notificacao of notificacoes"
+            >
+
+                <!-- ÍCONE -->
+
+                <div class="notificacao-icone">
+
+                    <i class="bi bi-bell"></i>
+
+                </div>
+
+
+                <!-- CONTEÚDO -->
+
+                <div class="notificacao-info">
+
+                    <h2>
+                        {{ notificacao.mensagem }}
+                    </h2>
+
+                    <p>
+                        Notificação {{ notificacao.status }}
+                    </p>
+
+                    <span>
+                        {{ notificacao.dataUltimaAcao | date:'dd/MM/yyyy HH:mm' }}
+                    </span>
+
+                </div>
+
+
+                <!-- AÇÃO -->
+
+                <button
+                    *ngIf="notificacao.status === 'não lida'"
+                    type="button"
+                    class="botao-ler"
+                    (click)="marcarComoLida(notificacao.id)"
+                >
+
+                    Marcar como lida
+
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 NENHUMA NOTIFICAÇÃO
+            ====================================== -->
+
+            <div
+                class="conteudo-vazio"
+                *ngIf="notificacoes.length === 0"
+            >
+
+                <div class="icone-vazio">
+
+                    <i class="bi bi-bell"></i>
+
+                </div>
+
+                <h2>
+                    Nenhuma notificação
+                </h2>
+
+                <p>
+                    Suas notificações aparecerão aqui.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

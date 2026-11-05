@@ -1,0 +1,972 @@
+/* =========================================
+   PÁGINA
+========================================= */
+
+.calendario-page {
+
+    width: 100%;
+
+    min-height: calc(100vh - 90px);
+
+    display: flex;
+
+    background: #20272b;
+
+    color: #e8edf0;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   MENU LATERAL
+========================================= */
+
+.profile-sidebar {
+
+    width: 350px;
+
+    min-width: 350px;
+
+    min-height: calc(100vh - 90px);
+
+    padding: 35px 25px 35px 48px;
+
+    box-sizing: border-box;
+
+    background: #20272b;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+/* =========================================
+   ITENS DO MENU
+========================================= */
+
+.sidebar-item {
+
+    width: 323px;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #aebbc2;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    font-size: 18px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+
+}
+
+
+.sidebar-item i {
+
+    width: 24px;
+
+    font-size: 20px;
+
+    text-align: center;
+
+    color: #aebbc2;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.sidebar-item:hover {
+
+    background: #2b353a;
+
+    color: #e9edef;
+
+}
+
+
+.sidebar-item:hover i {
+
+    color: #5fd3ee;
+
+    transform: scale(1.08);
+
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.calendario-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 30px 20px 50px 24px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.calendario-header {
+
+    margin-bottom: 22px;
+
+}
+
+
+.calendario-header h1 {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    font-weight: 600;
+
+}
+
+
+.calendario-header p {
+
+    margin: 7px 0 0;
+
+    color: #718691;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   MESES
+========================================= */
+
+.meses-section {
+
+    background: #252e33;
+
+    border: 1px solid #354047;
+
+    border-radius: 6px;
+
+    padding: 16px 18px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.meses-header {
+
+    margin-bottom: 12px;
+
+}
+
+
+.meses-header h2 {
+
+    margin: 0;
+
+    color: #e9edef;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.meses-list {
+
+    display: grid;
+
+    grid-template-columns: repeat(12, 1fr);
+
+    gap: 5px;
+
+}
+
+
+.mes {
+
+    min-width: 0;
+
+    border: 1px solid #354047;
+
+    border-radius: 5px;
+
+    background: #1d2428;
+
+    color: #8d9aa1;
+
+    padding: 8px 4px;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+
+}
+
+
+.mes:hover {
+
+    background: #2b353a;
+
+    border-color: #4a5960;
+
+    color: #e9edef;
+
+}
+
+
+.mes.active {
+
+    background: #34464d;
+
+    border-color: #5fd3ee;
+
+    color: #5fd3ee;
+
+}
+
+
+/* =========================================
+   SEMANA
+========================================= */
+
+.semana-section {
+
+    background: #252e33;
+
+    border: 1px solid #354047;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================
+   TOPO DA SEMANA
+========================================= */
+
+.semana-topo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    border-bottom: 1px solid #354047;
+
+}
+
+
+.semana-topo h2 {
+
+    margin: 0 0 4px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+}
+
+
+.semana-topo span {
+
+    color: #718691;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================
+   NAVEGAÇÃO
+========================================= */
+
+.semana-navegacao {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+
+.nav-button,
+.hoje-button {
+
+    border: 1px solid #3d4a50;
+
+    border-radius: 5px;
+
+    background: #2b353a;
+
+    color: #aebbc2;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+
+}
+
+
+.nav-button {
+
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.hoje-button {
+
+    height: 32px;
+
+    padding: 0 13px;
+
+    font-size: 12px;
+
+}
+
+
+.nav-button:hover,
+.hoje-button:hover {
+
+    background: #35434a;
+
+    border-color: #5fd3ee;
+
+    color: #5fd3ee;
+
+}
+
+
+/* =========================================
+   SCROLL
+========================================= */
+
+.semana-scroll {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+/* =========================================
+   GRADE
+========================================= */
+
+.semana-calendar {
+
+    display: grid;
+
+    grid-template-columns:
+        55px repeat(7, minmax(105px, 1fr));
+
+    min-width: 790px;
+
+}
+
+
+/* =========================================
+   COLUNA DE HORÁRIOS
+========================================= */
+
+.horarios {
+
+    background: #20272b;
+
+    border-right: 1px solid #354047;
+
+}
+
+
+.horario-vazio {
+
+    height: 54px;
+
+    border-bottom: 1px solid #354047;
+
+    box-sizing: border-box;
+
+}
+
+
+.horario {
+
+    height: 52px;
+
+    padding: 8px 7px;
+
+    box-sizing: border-box;
+
+    color: #66777f;
+
+    font-size: 10px;
+
+    text-align: right;
+
+    border-bottom: 1px solid #303a40;
+
+}
+
+
+/* =========================================
+   DIA
+========================================= */
+
+.dia {
+
+    min-width: 105px;
+
+    border-right: 1px solid #354047;
+
+    position: relative;
+
+}
+
+
+.dia:last-child {
+
+    border-right: none;
+
+}
+
+
+/* =========================================
+   CABEÇALHO DO DIA
+========================================= */
+
+.dia-header {
+
+    height: 54px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 2px;
+
+    background: #20272b;
+
+    border-bottom: 1px solid #354047;
+
+}
+
+
+.dia-header strong {
+
+    color: #71818a;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+}
+
+
+.dia-header span {
+
+    color: #dce4e7;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   HOJE
+========================================= */
+
+.dia-hoje {
+
+    box-shadow:
+        inset 1px 0 0 #5fd3ee,
+        inset -1px 0 0 #5fd3ee;
+
+}
+
+
+.dia-hoje .dia-header {
+
+    background: #29383e;
+
+}
+
+
+.dia-hoje .dia-header strong,
+.dia-hoje .dia-header span {
+
+    color: #5fd3ee;
+
+}
+
+
+/* =========================================
+   FERIADO
+========================================= */
+
+.feriado {
+
+    position: absolute;
+
+    top: 57px;
+
+    left: 4px;
+
+    right: 4px;
+
+    z-index: 5;
+
+    min-height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 5px 6px;
+
+    box-sizing: border-box;
+
+    background: #303b40;
+
+    border: 1px solid #52636b;
+
+    border-radius: 4px;
+
+    color: #aebbc2;
+
+    font-size: 9px;
+
+    line-height: 1.2;
+
+    overflow: hidden;
+
+}
+
+
+.feriado i {
+
+    flex-shrink: 0;
+
+    font-size: 10px;
+
+    color: #5fd3ee;
+
+}
+
+
+.feriado span {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* =========================================
+   CÉLULAS DAS HORAS
+========================================= */
+
+.horario-cell {
+    height: 52px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-bottom: 1px solid #dfe5e8;
+    cursor: pointer;
+    transition: background .15s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.horario-cell:hover {
+    background: #f2f7f9;
+}
+
+.horario-cell.horario-selecionado {
+    background: #dff7fc;
+    box-shadow: inset 0 0 0 2px #58d8f2;
+}
+
+.horario-cell.tem-lembrete {
+    background: #dff7fc;
+}
+
+.texto-lembrete {
+    display: block;
+    padding: 5px 7px;
+    color: #203038;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =========================================
+   FORMULÁRIO DE LEMBRETE
+========================================= */
+
+.lembrete-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.lembrete-card {
+    width: 100%;
+    max-width: 480px;
+    background: #29343a;
+    border: 1px solid #3d4b51;
+    border-radius: 8px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+}
+
+.lembrete-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #3b484e;
+}
+
+.lembrete-header h2 {
+    margin: 0 0 5px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.lembrete-header p {
+    margin: 0;
+    color: #58d8f2;
+    font-size: 13px;
+}
+
+.fechar-button {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: #9eacb2;
+    cursor: pointer;
+}
+
+.fechar-button:hover {
+    background: #354248;
+    color: #ffffff;
+}
+
+.lembrete-form {
+    padding: 20px;
+}
+
+.lembrete-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #d6dfe2;
+    font-size: 13px;
+}
+
+.lembrete-form textarea {
+    width: 100%;
+    min-height: 110px;
+    box-sizing: border-box;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid #435158;
+    border-radius: 5px;
+    outline: none;
+    background: #344047;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.lembrete-form textarea:focus {
+    border-color: #58d8f2;
+}
+
+.lembrete-form textarea::placeholder {
+    color: #7b8b91;
+}
+
+.lembrete-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px 20px;
+}
+
+.acoes-direita {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.botao-excluir,
+.botao-cancelar,
+.botao-salvar {
+    border: none;
+    border-radius: 5px;
+    padding: 9px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.botao-excluir {
+    background: transparent;
+    color: #e47b7b;
+}
+
+.botao-excluir:hover {
+    background: #3a3030;
+}
+
+.botao-cancelar {
+    background: #354248;
+    color: #c7d1d5;
+}
+
+.botao-cancelar:hover {
+    background: #405057;
+}
+
+.botao-salvar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #58d8f2;
+    color: #172126;
+    font-weight: 600;
+}
+
+.botao-salvar:hover {
+    background: #78e0f4;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .meses-list {
+
+        grid-template-columns:
+            repeat(6, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 1100px) {
+
+    .profile-sidebar {
+
+        width: 280px;
+
+        min-width: 280px;
+
+        padding-left: 25px;
+
+    }
+
+
+    .sidebar-item {
+
+        width: 100%;
+
+        font-size: 16px;
+
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .calendario-page {
+
+        flex-direction: column;
+
+    }
+
+
+    .profile-sidebar {
+
+        width: 100%;
+
+        min-width: 0;
+
+        min-height: auto;
+
+        padding: 15px;
+
+        flex-direction: row;
+
+        overflow-x: auto;
+
+    }
+
+
+    .sidebar-item {
+
+        width: auto;
+
+        min-width: 170px;
+
+    }
+
+
+    .calendario-content {
+
+        padding: 25px 18px 40px;
+
+    }
+
+
+    .meses-list {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .calendario-content {
+
+        padding: 20px 15px 30px;
+
+    }
+
+
+    .meses-list {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+
+    .semana-topo {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+    }
+
+
+    .semana-navegacao {
+
+        width: 100%;
+
+    }
+
+
+    .nav-button {
+
+        flex: 1;
+
+    }
+
+
+    .hoje-button {
+
+        flex: 2;
+
+    }
+
+}

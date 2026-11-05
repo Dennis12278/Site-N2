@@ -1,0 +1,149 @@
+<div class="historico-page">
+
+    <!-- =========================================
+         MENU LATERAL
+    ========================================== -->
+
+    <app-sidebar></app-sidebar>
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
+
+    <main class="historico-content">
+
+        <!-- =========================================
+             CABEÇALHO
+        ========================================== -->
+
+        <div class="historico-header">
+
+            <h1>
+                Histórico de Leitura
+            </h1>
+
+            <div class="historico-acoes">
+
+                <button
+                    type="button"
+                    class="historico-botao"
+                    (click)="paginaAnterior()"
+                    [disabled]="paginaAtual === 0"
+                >
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="historico-botao"
+                    (click)="proximaPagina()"
+                >
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="historico-botao"
+                    (click)="abrirMenu()"
+                >
+                    <i class="bi bi-three-dots-vertical"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             LISTA DE LEITURAS
+        ========================================== -->
+
+        <div
+            class="leituras-grid"
+            *ngIf="leituras.length > 0"
+        >
+
+            <div
+                class="leitura-card"
+                *ngFor="let leitura of leituras"
+                (click)="abrirLeitura(leitura)"
+            >
+
+                <!-- =================================
+                     CAPA
+                ================================== -->
+
+                <div class="leitura-capa">
+
+                    <img
+                        [src]="urlCapa(leitura.capa)"
+                        [alt]="leitura.titulo"
+                    >
+
+                    <!-- PROGRESSO SOBRE A CAPA -->
+
+                    <div
+                        class="progresso"
+                        [style.--progresso]="leitura.progresso + '%'"
+                    >
+
+                        <span>
+                            {{ leitura.progresso }}%
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     INFORMAÇÕES
+                ================================== -->
+
+                <div class="leitura-info">
+
+                    <div class="leitura-detalhes">
+
+                        <span class="leitura-tempo">
+                            {{ leitura.lidoHa }}
+                        </span>
+
+                    </div>
+
+                    <h2>
+                        {{ leitura.titulo }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             SEM HISTÓRICO
+        ========================================== -->
+
+        <div
+            class="historico-vazio"
+            *ngIf="leituras.length === 0"
+        >
+
+            <i class="bi bi-clock-history"></i>
+
+            <h2>
+                Nenhum histórico de leitura
+            </h2>
+
+            <p>
+                Os títulos que você começar a ler
+                aparecerão aqui.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>

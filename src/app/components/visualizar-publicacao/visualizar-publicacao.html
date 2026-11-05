@@ -1,0 +1,309 @@
+<div class="visualizar-page">
+
+    <main class="visualizar-content">
+
+        <div class="topo">
+
+            <button
+                type="button"
+                class="botao-voltar"
+                (click)="voltar()"
+            >
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </button>
+
+        </div>
+
+
+        <section
+            class="publicacao"
+            *ngIf="publicacao"
+        >
+
+            <!-- CAPA -->
+
+            <div class="publicacao-capa">
+
+                <img
+                    *ngIf="publicacao.capa"
+                    [src]="urlCapa(publicacao.capa)"
+                    [alt]="publicacao.titulo"
+                >
+
+                <i
+                    *ngIf="!publicacao.capa"
+                    class="bi bi-book"
+                ></i>
+
+            </div>
+
+
+            <!-- INFORMAÇÕES -->
+
+            <div class="publicacao-info">
+
+                <div class="migalhas">
+                    HOME / {{ publicacao.visibilidade | uppercase }}
+                </div>
+
+                <h1>
+                    {{ publicacao.titulo }}
+                </h1>
+
+                <div class="etiquetas">
+
+                    <span class="etiqueta">
+                        {{ publicacao.visibilidade | uppercase }}
+                    </span>
+
+                    <span
+                        class="etiqueta"
+                        *ngIf="publicacao.dataPublicacao"
+                    >
+                        {{ publicacao.dataPublicacao | date:'yyyy' }}
+                    </span>
+
+                    <span class="etiqueta status">
+                        <i class="bi bi-circle-fill"></i>
+                        PUBLICADO
+                    </span>
+
+                </div>
+
+                <p
+                    class="publicado-em"
+                    *ngIf="publicacao.dataPublicacao"
+                >
+                    Publicado em {{ publicacao.dataPublicacao | date:'dd/MM/yyyy HH:mm' }}
+                </p>
+
+                <div class="linha"></div>
+
+                <div class="descricao">
+
+                    <h2>
+                        Descrição
+                    </h2>
+
+                    <p
+                        [class.recolhida]="descricaoLonga && !descricaoExpandida"
+                    >
+                        {{ publicacao.conteudo || 'Sem descrição.' }}
+                    </p>
+
+                    <button
+                        type="button"
+                        class="ver-mais"
+                        *ngIf="descricaoLonga"
+                        (click)="alternarDescricao()"
+                    >
+                        {{ descricaoExpandida ? 'Ver menos' : 'Ver mais' }}
+                        <i
+                            class="bi"
+                            [class.bi-chevron-down]="!descricaoExpandida"
+                            [class.bi-chevron-up]="descricaoExpandida"
+                        ></i>
+                    </button>
+
+                </div>
+
+
+                <!-- BOTÕES DE AÇÃO -->
+
+                <div class="acoes">
+
+                    <button
+                        type="button"
+                        class="botao-ler"
+                    >
+                        <i class="bi bi-book"></i>
+                        Começar a ler
+                    </button>
+
+
+                    <!-- SEGUIR (marcadores) -->
+
+                    <div class="grupo-menu">
+
+                        <button
+                            type="button"
+                            class="botao-secundario"
+                            [class.ativo]="menuAberto === 'seguir' || marcadorAtual"
+                            (click)="alternarMenu('seguir', $event)"
+                        >
+                            <i
+                                class="bi"
+                                [ngClass]="marcadorAtual ? 'bi-bookmark-fill' : 'bi-bookmark'"
+                            ></i>
+                            {{ marcadorAtual ? textoMarcadorAtual : 'Seguir' }}
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+
+                        <div
+                            class="menu-marcadores"
+                            *ngIf="menuAberto === 'seguir'"
+                            (click)="$event.stopPropagation()"
+                        >
+
+                            <div class="menu-titulo">
+                                MARCAR COMO
+                            </div>
+
+                            <button
+                                type="button"
+                                class="menu-item"
+                                *ngFor="let opcao of opcoes"
+                                [class.selecionado]="marcadorAtual === opcao.valor"
+                                (click)="escolherMarcador(opcao.valor)"
+                            >
+                                <i class="bi" [ngClass]="opcao.icone"></i>
+                                {{ opcao.texto }}
+                                <i
+                                    class="bi bi-check2 marca"
+                                    *ngIf="marcadorAtual === opcao.valor"
+                                ></i>
+                            </button>
+
+                            <button
+                                type="button"
+                                class="menu-item remover"
+                                *ngIf="marcadorAtual"
+                                (click)="removerMarcador()"
+                            >
+                                <i class="bi bi-x"></i>
+                                Remover marcador
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ADICIONAR À COLEÇÃO -->
+
+                    <div class="grupo-menu">
+
+                        <button
+                            type="button"
+                            class="botao-secundario"
+                            [class.ativo]="menuAberto === 'colecao'"
+                            (click)="alternarMenu('colecao', $event)"
+                        >
+                            <i class="bi bi-collection"></i>
+                            Adicionar à coleção
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+
+                        <div
+                            class="menu-marcadores menu-colecoes"
+                            *ngIf="menuAberto === 'colecao'"
+                            (click)="$event.stopPropagation()"
+                        >
+
+                            <div class="busca-colecao">
+
+                                <i class="bi bi-search"></i>
+
+                                <input
+                                    type="text"
+                                    placeholder="Pesquisar suas coleções..."
+                                    [(ngModel)]="buscaColecao"
+                                >
+
+                            </div>
+
+                            <div
+                                class="lista-colecoes"
+                                *ngIf="colecoesFiltradas.length > 0"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="menu-item"
+                                    *ngFor="let colecao of colecoesFiltradas"
+                                    [class.selecionado]="colecao.contem"
+                                    [disabled]="colecao.salvando"
+                                    (click)="alternarColecao(colecao)"
+                                >
+                                    <i
+                                        class="bi"
+                                        [class.bi-check-square-fill]="colecao.contem"
+                                        [class.bi-square]="!colecao.contem"
+                                    ></i>
+                                    {{ colecao.titulo }}
+                                </button>
+
+                            </div>
+
+                            <div
+                                class="vazio-colecoes"
+                                *ngIf="!carregandoColecoes && colecoes.length === 0"
+                            >
+                                Você ainda não tem coleções.
+                            </div>
+
+                            <div
+                                class="vazio-colecoes"
+                                *ngIf="carregandoColecoes"
+                            >
+                                Carregando...
+                            </div>
+
+                            <div class="divisor-menu"></div>
+
+                            <button
+                                type="button"
+                                class="menu-item criar"
+                                (click)="criarNovaColecao()"
+                            >
+                                <i class="bi bi-plus-lg"></i>
+                                Criar nova coleção
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NÃO ENCONTRADA -->
+
+        <div
+            class="publicacao-nao-encontrada"
+            *ngIf="!publicacao && !carregando"
+        >
+
+            <i class="bi bi-file-earmark-text"></i>
+
+            <h2>
+                Publicação não encontrada
+            </h2>
+
+            <p>
+                Não foi possível encontrar esta publicação.
+            </p>
+
+            <button
+                type="button"
+                (click)="voltar()"
+            >
+                Voltar para Home
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div
+    class="fundo-menu"
+    *ngIf="menuAberto"
+    (click)="fecharMenu()"
+></div>

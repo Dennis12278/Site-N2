@@ -1,0 +1,1306 @@
+/* =========================================================
+   HOME
+========================================================= */
+
+.home-page {
+    min-height: 100vh;
+
+    padding: 35px 45px 50px 25px;
+
+    background: #20272b;
+
+    color: #ffffff;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+.home-section {
+    margin-bottom: 28px;
+}
+
+.section-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: 600;
+}
+
+.section-header p {
+    margin: 5px 0 0;
+
+    color: #8195a2;
+
+    font-size: 13px;
+}
+
+.see-more {
+    border: none;
+
+    background: transparent;
+
+    color: #58d8f2;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    padding: 5px 0;
+}
+
+.see-more:hover {
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   CALENDÁRIO
+========================================================= */
+
+.calendar-card {
+    width: 100%;
+
+    min-height: 170px;
+
+    padding: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-sizing: border-box;
+
+    background: #29343a;
+
+    border: 1px solid #34434a;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.calendar-card:hover {
+    border-color: #58d8f2;
+}
+
+.calendar-icon {
+    width: 60px;
+    height: 60px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #34434b;
+
+    border-radius: 6px;
+
+    color: #58d8f2;
+
+    font-size: 28px;
+}
+
+.calendar-info {
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-left: 20px;
+}
+
+.calendar-text h3 {
+    margin: 0 0 7px;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: 600;
+}
+
+.calendar-text p {
+    margin: 0;
+
+    color: #8195a2;
+
+    font-size: 13px;
+}
+
+.calendar-button {
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 5px;
+
+    padding: 10px 15px;
+
+    background: #58d8f2;
+
+    color: #142126;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.calendar-button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   HISTÓRICO
+========================================================= */
+
+.home-history {
+    width: 100%;
+
+    margin-bottom: 28px;
+
+    background: #29343a;
+
+    border: 1px solid #34434a;
+
+    border-radius: 6px;
+
+    overflow: visible;
+}
+
+.history-bar {
+    min-height: 58px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #344148;
+}
+
+.history-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.history-title i {
+    color: #58d8f2;
+
+    font-size: 17px;
+}
+
+.history-title span {
+    color: #ffffff;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+.history-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+.history-action {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #8195a2;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.history-action:hover {
+    background: #34434b;
+
+    color: #58d8f2;
+}
+
+.history-action:disabled {
+    opacity: 0.3;
+
+    cursor: default;
+}
+
+.history-menu-wrapper {
+    position: relative;
+}
+
+.history-menu {
+    position: absolute;
+
+    top: 38px;
+
+    right: 0;
+
+    width: 150px;
+
+    padding: 5px;
+
+    background: #29343a;
+
+    border: 1px solid #34434a;
+
+    border-radius: 5px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+    z-index: 50;
+}
+
+.history-menu button {
+    width: 100%;
+
+    padding: 9px 11px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: transparent;
+
+    color: #c8d4da;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.history-menu button:hover {
+    background: #34434b;
+
+    color: #58d8f2;
+}
+
+.history-content {
+    padding: 18px;
+}
+
+.history-cards {
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.history-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    background: #20272b;
+
+    border: 1px solid #344148;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.history-card:hover {
+    border-color: #58d8f2;
+}
+
+.history-cover {
+    width: 100%;
+
+    height: 125px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #34434b;
+
+    color: #738894;
+}
+
+.history-cover i {
+    font-size: 28px;
+}
+
+.history-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.history-info {
+    padding: 12px;
+}
+
+.history-info h3 {
+    margin: 0 0 7px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.history-info span {
+    color: #70838e;
+
+    font-size: 11px;
+}
+
+.history-minimized {
+    min-height: 52px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.history-minimized span {
+    color: #8195a2;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.history-show {
+    border: none;
+
+    background: transparent;
+
+    color: #58d8f2;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RANKINGS
+========================================================= */
+
+.ranking-section {
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+.ranking-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 13px;
+}
+
+.ranking-title-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0;
+}
+
+.ranking-tab {
+    padding: 0;
+
+    margin-right: 12px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #778890;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.ranking-tab.active {
+    color: #ffffff;
+}
+
+.ranking-tab:hover {
+    color: #ffffff;
+}
+
+.ranking-title-area h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+.ranking-subtitle {
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+.ranking-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+.ranking-action {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #303c41;
+
+    border-radius: 4px;
+
+    background: #29343a;
+
+    color: #71838c;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.ranking-action:hover {
+    background: #34434b;
+
+    color: #58d8f2;
+}
+
+.ranking-action:disabled {
+    opacity: 0.35;
+
+    cursor: default;
+}
+
+
+/* =========================================================
+   CARDS DO RANKING
+========================================================= */
+
+.ranking-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+.ranking-card {
+    min-width: 0;
+
+    cursor: pointer;
+}
+
+.ranking-cover {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #29343a;
+
+    border-radius: 4px;
+
+    border: 1px solid #344148;
+}
+
+.ranking-cover:hover {
+    border-color: #58d8f2;
+}
+
+.ranking-position {
+    position: absolute;
+
+    top: 5px;
+
+    left: 5px;
+
+    z-index: 2;
+
+    min-width: 22px;
+
+    padding: 3px 5px;
+
+    background: rgba(25, 31, 35, 0.9);
+
+    border-radius: 4px;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-align: center;
+}
+
+.ranking-cover-icon {
+    color: #657982;
+
+    font-size: 30px;
+}
+
+.ranking-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ranking-info {
+    padding-top: 7px;
+
+    text-align: center;
+}
+
+.ranking-time {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #6f828c;
+
+    font-size: 10px;
+}
+
+.ranking-info h3 {
+    margin: 0;
+
+    color: #dce3e6;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 2;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   VAZIO DO RANKING
+========================================================= */
+
+.ranking-empty {
+    width: 100%;
+
+    min-height: 110px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    background: #29343a;
+
+    border: 1px dashed #34434a;
+
+    border-radius: 5px;
+
+    color: #71838c;
+
+    font-size: 12px;
+}
+
+.ranking-empty i {
+    color: #58d8f2;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   ÚLTIMOS PUBLICADOS
+========================================================= */
+
+.content-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+.content-card {
+    min-height: 210px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #29343a;
+
+    border: 1px solid #34434a;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.content-card:hover {
+    border-color: #58d8f2;
+}
+
+.content-cover {
+    width: 100%;
+
+    height: 125px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #34434b;
+
+    color: #738894;
+}
+
+.content-cover img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.content-info {
+    padding: 13px;
+}
+
+.content-info h3 {
+    margin: 0 0 7px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.content-time {
+    display: block;
+
+    color: #70838e;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
+
+.empty-content {
+    width: 100%;
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    background: #29343a;
+
+    border: 1px dashed #34434a;
+
+    border-radius: 6px;
+
+    text-align: center;
+}
+
+.empty-icon {
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #34434b;
+
+    border-radius: 50%;
+
+    color: #58d8f2;
+
+    font-size: 21px;
+}
+
+.empty-content span {
+    color: #8195a2;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   COLEÇÕES DE USUÁRIOS
+========================================================= */
+
+.colecoes-home-section {
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+.colecoes-ver-mais {
+    display: block;
+
+    padding: 0;
+
+    margin: 0 0 7px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8195a2;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.colecoes-ver-mais:hover {
+    color: #58d8f2;
+}
+
+.colecoes-home-header {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.colecoes-home-header h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+.colecoes-home-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.colecoes-home-action {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #303c41;
+
+    border-radius: 4px;
+
+    background: #29343a;
+
+    color: #71838c;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.colecoes-home-action:hover {
+    background: #34434b;
+
+    color: #58d8f2;
+}
+
+.colecoes-home-action:disabled {
+    opacity: 0.3;
+
+    cursor: default;
+}
+
+/* abas Todas / Minhas / Curtidas */
+
+.colecoes-abas {
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+.colecoes-abas button {
+    height: 32px;
+
+    padding: 0 14px;
+
+    background: #29343a;
+
+    border: 1px solid #39464d;
+
+    border-radius: 6px;
+
+    color: #9aa7ac;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.colecoes-abas button:hover {
+    color: #ffffff;
+
+    border-color: #5fd3ee;
+}
+
+.colecoes-abas button.ativa {
+    background: #5fd3ee;
+
+    border-color: #5fd3ee;
+
+    color: #152126;
+
+    font-weight: 700;
+}
+
+.colecoes-home-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.colecao-home-card {
+    min-width: 0;
+
+    cursor: pointer;
+}
+
+.colecao-home-card h3 {
+    margin: 12px 0 6px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+.colecao-home-meta {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    color: #8195a2;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+/* mosaico: capas em fatias diagonais */
+
+.colecao-home-mosaico {
+    position: relative;
+
+    width: 100%;
+
+    height: 200px;
+
+    background: #1d262b;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+.colecao-home-card:hover .colecao-home-mosaico {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.colecao-home-mosaico > i {
+    position: absolute;
+
+    inset: 0;
+
+    margin: auto;
+
+    width: fit-content;
+
+    height: fit-content;
+
+    font-size: 34px;
+
+    color: #536269;
+}
+
+.colecao-home-mosaico .mosaico-img {
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* 1 capa: ocupa tudo */
+.mosaico-1-0 {
+    clip-path: none;
+}
+
+/* 2 capas */
+.mosaico-2-0 {
+    clip-path: polygon(0 0, 56% 0, 44% 100%, 0 100%);
+}
+
+.mosaico-2-1 {
+    clip-path: polygon(56% 0, 100% 0, 100% 100%, 44% 100%);
+}
+
+/* 3 capas */
+.mosaico-3-0 {
+    clip-path: polygon(0 0, 50% 0, 38% 100%, 0 100%);
+}
+
+.mosaico-3-1 {
+    clip-path: polygon(50% 0, 74% 0, 62% 100%, 38% 100%);
+}
+
+.mosaico-3-2 {
+    clip-path: polygon(74% 0, 100% 0, 100% 100%, 62% 100%);
+}
+
+.colecao-home-dono {
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+
+    z-index: 3;
+
+    padding: 3px 9px;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    border-radius: 5px;
+
+    font-size: 11px;
+
+    color: #ffffff;
+}
+
+.colecoes-home-vazio {
+    width: 100%;
+
+    min-height: 110px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    background: #29343a;
+
+    border: 1px dashed #34434a;
+
+    border-radius: 5px;
+
+    color: #71838c;
+}
+
+.colecoes-home-vazio > i {
+    color: #58d8f2;
+
+    font-size: 20px;
+}
+
+.colecoes-home-vazio div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.colecoes-home-vazio strong {
+    color: #cbd4d8;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.colecoes-home-vazio span {
+    color: #71838c;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .home-page {
+        padding: 30px 35px 45px 25px;
+    }
+
+    .history-cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .ranking-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .content-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .home-page {
+        padding: 25px;
+    }
+
+    .history-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ranking-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .content-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .calendar-info {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .colecoes-home-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .home-page {
+        padding: 20px 15px 40px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+    }
+
+    .calendar-card {
+        min-height: auto;
+
+        padding: 20px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .calendar-info {
+        width: 100%;
+
+        margin-left: 0;
+
+        align-items: flex-start;
+    }
+
+    .calendar-button {
+        width: 100%;
+    }
+
+    .history-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ranking-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ranking-title-area h2,
+    .ranking-subtitle,
+    .ranking-tab {
+        font-size: 16px;
+    }
+
+    .colecoes-home-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -1,0 +1,190 @@
+.header {
+
+    width: 100%;
+    height: 90px;
+
+    background: #262B30;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+}
+
+.logo {
+
+    width: 250px;
+
+}
+
+.logo img {
+
+    height: 65px;
+
+    width: auto;
+
+    display: block;
+
+}
+
+.search {
+
+    width: 760px;
+
+    height: 58px;
+
+    background: #2d3338;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 18px;
+
+    margin-right: 40px;
+
+}
+
+.search i {
+
+    color: #8d959d;
+
+    font-size: 23px;
+
+}
+
+.search input {
+
+    flex: 1;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 18px;
+
+    margin-left: 15px;
+
+}
+
+.search input::placeholder {
+
+    color: #697178;
+
+}
+
+.search button {
+
+    width: 120px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #3b4248;
+
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+.menu {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+}
+
+.menu i {
+
+    color: #adb5bd;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+}
+
+.menu i:hover {
+
+    color: white;
+
+}
+
+.perfil {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #3d6b8d;
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+/* LOGO CLICÁVEL */
+.logo {
+    cursor: pointer;
+}
+
+
+/* FUNDO QUANDO O MENU ESTÁ ABERTO */
+.menu-overlay {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 999;
+
+    background: transparent;
+
+}
+
+/* MENU DO USUÁRIO */
+app-user-menu {
+
+    position: fixed;
+
+    top: 100px;
+    right: 20px;
+
+    z-index: 1000;
+
+}

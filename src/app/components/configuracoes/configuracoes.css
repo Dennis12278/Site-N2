@@ -1,0 +1,430 @@
+/* =========================================
+   PÁGINA
+========================================= */
+
+.configuracoes-page {
+    width: 100%;
+    min-height: calc(100vh - 90px);
+    display: flex;
+    background: #20272b;
+    color: #e8edf0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.config-content {
+    flex: 1;
+    min-width: 0;
+    padding: 45px 45px 60px 38px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   ABAS
+========================================= */
+
+.config-tabs {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #354047;
+    margin-bottom: 35px;
+}
+
+.tab {
+    border: none;
+    background: transparent;
+    color: #8d999f;
+    padding: 15px 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s ease;
+}
+
+.tab:hover {
+    color: #dce2e5;
+}
+
+.tab.active {
+    color: #ffffff;
+    border-bottom-color: #70c9df;
+}
+
+.tab.active i {
+    color: #70c9df;
+}
+
+
+/* =========================================
+   SEÇÃO
+========================================= */
+
+.config-section {
+    max-width: 900px;
+}
+
+.config-section h1 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.subtitle {
+    margin: 8px 0 28px;
+    color: #8d999f;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.config-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: #252e33;
+    border: 1px solid #354047;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 18px;
+    box-sizing: border-box;
+}
+
+.section-info {
+    flex: 1;
+}
+
+.section-info h2 {
+    margin: 0 0 7px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e9edef;
+}
+
+.section-info p {
+    margin: 0;
+    color: #87939a;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.primary-button,
+.secondary-button {
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.primary-button {
+    background: #70c9df;
+    color: #1f2b30;
+    font-weight: 600;
+}
+
+.primary-button:hover {
+    background: #5db8cf;
+}
+
+.secondary-button {
+    background: #303a40;
+    color: #dce2e5;
+    border: 1px solid #414d54;
+}
+
+.secondary-button:hover {
+    background: #39454c;
+}
+
+
+/* =========================================
+   E-MAIL
+========================================= */
+
+.email-area {
+    flex-direction: row;
+    align-items: center;
+}
+
+.email-form {
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.email-form label,
+.password-form label {
+    color: #7f8b92;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.input-button {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    box-sizing: border-box;
+    background: #1d2428;
+    border: 1px solid #3a464d;
+    border-radius: 6px;
+    color: #e9edef;
+    outline: none;
+    padding: 11px 13px;
+    font-size: 13px;
+}
+
+input:focus {
+    border-color: #70c9df;
+}
+
+.input-button input {
+    flex: 1;
+    min-width: 0;
+}
+
+/* =========================================
+   SENHA
+========================================= */
+
+.password-area {
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.password-form {
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.password-form input {
+    width: 100%;
+}
+
+.password-area .save-area {
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+/* =========================================
+   SALVAR
+========================================= */
+
+.save-area {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+.save-button {
+    padding: 11px 22px;
+}
+
+
+/* =========================================
+   VISIBILIDADE
+========================================= */
+
+.visibility-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: #252e33;
+    border: 1px solid #354047;
+    border-radius: 8px;
+    padding: 21px 24px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.visibility-card h2 {
+    margin: 0 0 6px;
+    color: #e9edef;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.visibility-card p {
+    margin: 0;
+    color: #87939a;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+
+/* =========================================
+   SWITCH
+========================================= */
+
+.switch {
+    position: relative;
+    width: 46px;
+    height: 25px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch span {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: #3b464d;
+    border-radius: 20px;
+    transition: 0.2s ease;
+}
+
+.switch span::before {
+    content: "";
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    left: 3px;
+    top: 3px;
+    background: #d7dcdf;
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
+
+.switch input:checked + span {
+    background: #70c9df;
+}
+
+.switch input:checked + span::before {
+    transform: translateX(21px);
+}
+
+
+/* =========================================
+   TEMA
+========================================= */
+
+.theme-card {
+    background: #252e33;
+    border: 1px solid #354047;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 23px;
+    cursor: pointer;
+    border-bottom: 1px solid #354047;
+    transition: 0.2s ease;
+}
+
+.theme-option:last-child {
+    border-bottom: none;
+}
+
+.theme-option:hover {
+    background: #2b353a;
+}
+
+.theme-option.selected {
+    background: #2b353a;
+    box-shadow: inset 3px 0 0 #70c9df;
+}
+
+.theme-option input {
+    width: 17px;
+    height: 17px;
+    accent-color: #70c9df;
+}
+
+.theme-option strong {
+    display: block;
+    color: #e9edef;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.theme-option p {
+    margin: 0;
+    color: #87939a;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 850px) {
+
+    .configuracoes-page {
+        flex-direction: column;
+    }
+
+    .config-content {
+        padding: 30px 20px;
+    }
+
+    .config-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .email-form,
+    .password-form {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .config-content {
+        padding: 20px 15px;
+    }
+
+    .config-tabs {
+        overflow-x: auto;
+    }
+
+    .tab {
+        padding: 13px 15px;
+        white-space: nowrap;
+    }
+
+    .input-button {
+        flex-direction: column;
+    }
+
+    .input-button button {
+        width: 100%;
+    }
+}

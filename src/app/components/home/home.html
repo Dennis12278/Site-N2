@@ -1,0 +1,545 @@
+<div class="home-page">
+
+    <!-- =====================================================
+         CALENDÁRIO
+    ====================================================== -->
+
+    <section class="home-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Calendário</h2>
+
+                <p>
+                    Organize seus horários e atividades de estudo.
+                </p>
+            </div>
+
+            <button type="button" class="see-more" (click)="irParaCalendario()">
+                Ver mais
+                <i class="bi bi-arrow-right"></i>
+            </button>
+
+        </div>
+
+        <div class="calendar-card" (click)="irParaCalendario()">
+
+            <div class="calendar-icon">
+                <i class="bi bi-calendar3"></i>
+            </div>
+
+            <div class="calendar-info">
+
+                <div class="calendar-text">
+
+                    <h3>
+                        Seu calendário de estudos
+                    </h3>
+
+                    <p>
+                        Consulte suas atividades, horários e compromissos.
+                    </p>
+
+                </div>
+
+                <button type="button" class="calendar-button" (click)="$event.stopPropagation(); irParaCalendario()">
+                    Abrir calendário
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HISTÓRICO DE LEITURA
+    ====================================================== -->
+
+    <section class="home-history">
+
+        <div class="history-bar">
+
+            <div class="history-title">
+
+                <i class="bi bi-clock-history"></i>
+
+                <span>
+                    Histórico de Leitura
+                </span>
+
+            </div>
+
+            <div class="history-actions">
+
+                <button type="button" class="history-action" (click)="paginaAnteriorHistorico()"
+                    [disabled]="paginaHistorico === 0">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button type="button" class="history-action" (click)="proximaPaginaHistorico()"
+                    [disabled]="paginaHistorico === 1">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+                <div class="history-menu-wrapper">
+
+                    <button type="button" class="history-action" (click)="abrirMenuHistorico($event)">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+
+                    <div class="history-menu" *ngIf="menuHistoricoAberto">
+
+                        <button type="button" (click)="irParaHistorico()">
+                            Ver todos
+                        </button>
+
+                        <button type="button" (click)="minimizarHistorico()">
+                            Minimizar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="history-content" *ngIf="!historicoMinimizado">
+
+            <div class="history-cards">
+
+                <div
+                    class="history-card"
+                    *ngFor="let leitura of leiturasExibidas"
+                    (click)="abrirPublicacao({ id: leitura.idDocumento })"
+                >
+
+                    <div class="history-cover">
+
+                        <img
+                            *ngIf="leitura.capa"
+                            [src]="urlCapa(leitura.capa)"
+                            [alt]="leitura.titulo"
+                        >
+
+                        <i *ngIf="!leitura.capa" class="bi bi-book"></i>
+
+                    </div>
+
+                    <div class="history-info">
+
+                        <h3>
+                            {{ leitura.titulo }}
+                        </h3>
+
+                        <span>
+                            {{ leitura.lidoHa }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="history-minimized" *ngIf="historicoMinimizado">
+
+            <span>
+                Histórico de Leitura
+            </span>
+
+            <button type="button" class="history-show" (click)="mostrarHistorico()">
+                MOSTRAR
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIS RECENTES / POPULARES
+    ====================================================== -->
+
+    <section class="ranking-section">
+
+        <div class="ranking-header">
+
+            <div class="ranking-title-area">
+
+                <button type="button" class="ranking-tab" [class.active]="rankingAtual === 'recentes'"
+                    (click)="selecionarRanking('recentes')">
+                    Mais recentes
+                </button>
+
+                <button type="button" class="ranking-tab" [class.active]="rankingAtual === 'populares'"
+                    (click)="selecionarRanking('populares')">
+                    Populares
+                </button>
+
+            </div>
+
+            <div class="ranking-actions">
+
+                <button type="button" class="ranking-action" (click)="rankingAnterior()"
+                    [disabled]="paginaRanking === 0">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button type="button" class="ranking-action" (click)="rankingProximo()"
+                    [disabled]="paginaRanking === 1">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+                <button type="button" class="ranking-action">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="ranking-grid" *ngIf="documentosRanking.length > 0">
+
+            <article class="ranking-card" *ngFor="let documento of documentosRanking; let i = index" (click)="abrirPublicacao(documento)">
+
+                <div class="ranking-cover">
+
+                    <span class="ranking-position">
+                        #{{ i + 1 }}
+                    </span>
+                    
+                    <img *ngIf="documento.capa" class="ranking-cover-img"
+                        [src]="urlCapa(documento.capa)" [alt]="documento.titulo">
+
+                    <div class="ranking-cover-icon" *ngIf="!documento.capa">
+                        <i class="bi bi-book"></i>
+                    </div>
+
+                </div>
+
+                <div class="ranking-info">
+
+                    <span class="ranking-time">
+                        {{ tempoPublicacao(documento.dataPublicacao) }}
+                    </span>
+
+                    <h3>
+                        {{ documento.titulo }}
+                    </h3>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <div class="ranking-empty" *ngIf="documentosRanking.length === 0">
+
+            <i class="bi bi-book"></i>
+
+            <span>
+                Nenhum conteúdo disponível ainda.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIS SEGUIDORES - NOVOS QUADRINHOS
+    ====================================================== -->
+
+    <section class="ranking-section">
+
+        <div class="ranking-header">
+
+            <div class="ranking-title-area">
+
+                <h2>
+                    Mais seguidos
+                </h2>
+
+
+            </div>
+
+            <div class="ranking-actions">
+
+                <button type="button" class="ranking-action" (click)="seguidoresAnterior()"
+                    [disabled]="paginaSeguidores === 0">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button type="button" class="ranking-action" (click)="seguidoresProximo()"
+                    [disabled]="paginaSeguidores === 1">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+                <button type="button" class="ranking-action">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="ranking-empty">
+
+            <i class="bi bi-bookmark"></i>
+
+            <span>
+                Nenhum título disponível ainda.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ÚLTIMOS PUBLICADOS
+    ====================================================== -->
+
+    <section class="home-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Últimos publicados</h2>
+
+                <p>
+                    Confira os conteúdos publicados recentemente.
+                </p>
+            </div>
+
+            <button type="button" class="see-more" (click)="irParaPublicacoes()">
+                Ver mais
+                <i class="bi bi-arrow-right"></i>
+            </button>
+
+        </div>
+
+
+        <div class="content-grid" *ngIf="documentos.length > 0">
+
+            <div class="content-card" *ngFor="let documento of documentos" (click)="abrirPublicacao(documento)">
+                <div class="content-cover">
+
+                    <img *ngIf="documento.capa" [src]="urlCapa(documento.capa)" [alt]="documento.titulo">
+
+                    <i *ngIf="!documento.capa" class="bi bi-book"></i>
+
+                </div>
+
+                <div class="content-info">
+
+                    <h3>
+                        {{ documento.titulo }}
+                    </h3>
+
+                    <span class="content-time">
+                        {{ tempoPublicacao(documento.dataPublicacao) }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="empty-content" *ngIf="documentos.length === 0">
+
+            <div class="empty-icon">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+
+            <span>
+                Nenhuma publicação disponível ainda.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         GRUPOS
+    ====================================================== -->
+
+    <section class="home-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Grupos</h2>
+
+                <p>
+                    Acesse seus grupos e conteúdos compartilhados.
+                </p>
+            </div>
+
+            <button type="button" class="see-more" (click)="irParaGrupos()">
+                Ver mais
+                <i class="bi bi-arrow-right"></i>
+            </button>
+
+        </div>
+
+        <div class="empty-content">
+
+            <div class="empty-icon">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <span>
+                Nenhum grupo disponível ainda.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLEÇÕES DE USUÁRIOS
+    ====================================================== -->
+    <section class="colecoes-home-section">
+
+        <button type="button" class="colecoes-ver-mais" (click)="irParaColecoes()">
+            Ver mais →
+        </button>
+
+        <div class="colecoes-home-header">
+
+            <h2>
+                Coleções de usuários
+            </h2>
+
+            <div class="colecoes-home-actions">
+
+                <button type="button" class="colecoes-home-action" (click)="colecoesAnterior()"
+                    [disabled]="paginaColecoes === 0">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button type="button" class="colecoes-home-action" (click)="colecoesProxima()"
+                    [disabled]="paginaColecoes === 1">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+                <button type="button" class="colecoes-home-action">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- COLEÇÕES PÚBLICAS -->
+
+        <div class="colecoes-abas">
+
+            <button type="button" [class.ativa]="filtroColecao === 'todas'" (click)="selecionarFiltroColecao('todas')">
+                Todas
+            </button>
+
+            <button type="button" [class.ativa]="filtroColecao === 'minhas'" (click)="selecionarFiltroColecao('minhas')">
+                Minhas
+            </button>
+
+            <button type="button" [class.ativa]="filtroColecao === 'curtidas'" (click)="selecionarFiltroColecao('curtidas')">
+                Curtidas
+            </button>
+
+        </div>
+
+        <div class="colecoes-home-grid" *ngIf="colecoesFiltradas.length > 0">
+
+            <article
+                class="colecao-home-card"
+                *ngFor="let colecao of colecoesExibidas"
+                (click)="abrirColecao(colecao)"
+            >
+
+                <div class="colecao-home-mosaico">
+
+                    <span class="colecao-home-dono">
+                        {{ colecao.usuario }}
+                    </span>
+
+                    <ng-container *ngIf="colecao.capas.length > 0; else semCapas">
+                        <img
+                            *ngFor="let capa of colecao.capas; let i = index"
+                            class="mosaico-img"
+                            [ngClass]="'mosaico-' + colecao.capas.length + '-' + i"
+                            [src]="urlCapa(capa)"
+                            alt=""
+                        >
+                    </ng-container>
+
+                    <ng-template #semCapas>
+                        <i class="bi bi-collection"></i>
+                    </ng-template>
+
+                </div>
+
+                <h3>
+                    {{ colecao.titulo }}
+                </h3>
+
+                <div class="colecao-home-meta">
+
+                    <span>
+                        {{ colecao.quantidadeTitulos }}
+                        {{ colecao.quantidadeTitulos === 1 ? 'título' : 'títulos' }}
+                        · {{ colecao.tempo }}
+                    </span>
+
+                    <span>
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        {{ colecao.curtidas }}
+                    </span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- SEM COLEÇÕES -->
+
+        <div class="colecoes-home-vazio" *ngIf="colecoesHome.length === 0">
+
+            <i class="bi bi-collection"></i>
+
+            <div>
+
+                <strong>
+                    Nenhuma coleção compartilhada ainda
+                </strong>
+
+                <span>
+                    As coleções compartilhadas pelos usuários aparecerão aqui.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>

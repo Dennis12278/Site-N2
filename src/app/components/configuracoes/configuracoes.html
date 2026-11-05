@@ -1,0 +1,450 @@
+<div class="configuracoes-page">
+
+    <!-- =========================================
+         MENU LATERAL
+    ========================================== -->
+
+    <app-sidebar></app-sidebar>
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
+
+    <main class="config-content">
+
+        <!-- =====================================
+             ABAS
+        ====================================== -->
+
+        <div class="config-tabs">
+
+            <button
+                type="button"
+                class="tab"
+                [class.active]="abaAtiva === 'conta'"
+                (click)="abaAtiva = 'conta'"
+            >
+                <i class="bi bi-person"></i>
+
+                <span>
+                    Conta
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="tab"
+                [class.active]="abaAtiva === 'visibilidade'"
+                (click)="abaAtiva = 'visibilidade'"
+            >
+                <i class="bi bi-eye"></i>
+
+                <span>
+                    Visibilidade
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="tab"
+                [class.active]="abaAtiva === 'tema'"
+                (click)="abaAtiva = 'tema'"
+            >
+                <i class="bi bi-palette-fill"></i>
+
+                <span>
+                    Tema
+                </span>
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             CONTA
+        ====================================== -->
+
+        <section
+            class="config-section"
+            *ngIf="abaAtiva === 'conta'"
+        >
+
+            <h1>
+                Conta
+            </h1>
+
+            <p class="subtitle">
+                Gerencie as informações da sua conta no DREAM.
+            </p>
+
+
+            <!-- E-MAIL -->
+
+            <div class="config-card email-area">
+
+                <div class="section-info">
+
+                    <h2>
+                        E-mail
+                    </h2>
+
+                    <p>
+                        Usado para entrar no DREAM e receber
+                        notificações importantes.
+                    </p>
+
+                </div>
+
+
+                <div class="email-form">
+
+                    <label>
+                        E-MAIL
+                    </label>
+
+                    <div class="input-button">
+
+                        <input
+                            type="email"
+                            [(ngModel)]="email"
+                            placeholder="seuemail@gmail.com"
+                        >
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                            (click)="salvarConta()"
+                        >
+                            Atualizar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SENHA -->
+
+            <div class="config-card password-area">
+
+                <div class="section-info">
+
+                    <h2>
+                        Senha
+                    </h2>
+
+                    <p>
+                        Altere sua senha para manter sua conta segura.
+                    </p>
+
+                </div>
+
+
+                <div class="password-form">
+
+                    <label>
+                        NOVA SENHA
+                    </label>
+
+                    <input
+                        type="password"
+                        [(ngModel)]="novaSenha"
+                        placeholder="Digite sua nova senha"
+                    >
+
+
+                    <label>
+                        CONFIRMAR NOVA SENHA
+                    </label>
+
+                    <input
+                        type="password"
+                        [(ngModel)]="confirmarSenha"
+                        placeholder="Confirme sua nova senha"
+                    >
+
+                </div>
+
+
+                <div class="save-area">
+
+                    <button
+                        type="button"
+                        class="primary-button save-button"
+                        (click)="salvarConta()"
+                    >
+                        Salvar alterações
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             VISIBILIDADE
+        ====================================== -->
+
+        <section
+            class="config-section"
+            *ngIf="abaAtiva === 'visibilidade'"
+        >
+
+            <h1>
+                Visibilidade
+            </h1>
+
+            <p class="subtitle">
+                Controle quais informações do seu perfil podem
+                ser visualizadas por outras pessoas.
+            </p>
+
+
+            <!-- PERFIL PÚBLICO -->
+
+            <div class="visibility-card">
+
+                <div>
+
+                    <h2>
+                        Perfil público
+                    </h2>
+
+                    <p>
+                        Permite que outras pessoas encontrem
+                        e visualizem seu perfil.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        [(ngModel)]="perfilPublico"
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- PUBLICAÇÕES -->
+
+            <div class="visibility-card">
+
+                <div>
+
+                    <h2>
+                        Mostrar publicações
+                    </h2>
+
+                    <p>
+                        Exibe suas publicações no seu perfil público.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        [(ngModel)]="mostrarPublicacoes"
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- ESTATÍSTICAS -->
+
+            <div class="visibility-card">
+
+                <div>
+
+                    <h2>
+                        Mostrar estatísticas
+                    </h2>
+
+                    <p>
+                        Permite que outras pessoas visualizem
+                        suas estatísticas de leitura.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        [(ngModel)]="mostrarEstatisticas"
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- SALVAR -->
+
+            <div class="save-area">
+
+                <button
+                    type="button"
+                    class="primary-button save-button"
+                    (click)="salvarVisibilidade()"
+                >
+                    Salvar alterações
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             TEMA
+        ====================================== -->
+
+        <section
+            class="config-section"
+            *ngIf="abaAtiva === 'tema'"
+        >
+
+            <h1>
+                Tema
+            </h1>
+
+            <p class="subtitle">
+                Escolha como o DREAM deve aparecer para você.
+            </p>
+
+
+            <div class="theme-card">
+
+
+                <!-- ESCURO -->
+
+                <label
+                    class="theme-option"
+                    [class.selected]="tema === 'escuro'"
+                >
+
+                    <input
+                        type="radio"
+                        name="tema"
+                        value="escuro"
+                        [(ngModel)]="tema"
+                    >
+
+                    <div>
+
+                        <strong>
+                            Escuro
+                        </strong>
+
+                        <p>
+                            Usar o tema escuro do DREAM.
+                        </p>
+
+                    </div>
+
+                </label>
+
+
+                <!-- CLARO -->
+
+                <label
+                    class="theme-option"
+                    [class.selected]="tema === 'claro'"
+                >
+
+                    <input
+                        type="radio"
+                        name="tema"
+                        value="claro"
+                        [(ngModel)]="tema"
+                    >
+
+                    <div>
+
+                        <strong>
+                            Claro
+                        </strong>
+
+                        <p>
+                            Usar o tema claro do DREAM.
+                        </p>
+
+                    </div>
+
+                </label>
+
+
+                <!-- SISTEMA -->
+
+                <label
+                    class="theme-option"
+                    [class.selected]="tema === 'sistema'"
+                >
+
+                    <input
+                        type="radio"
+                        name="tema"
+                        value="sistema"
+                        [(ngModel)]="tema"
+                    >
+
+                    <div>
+
+                        <strong>
+                            Sistema
+                        </strong>
+
+                        <p>
+                            Usar automaticamente o tema do dispositivo.
+                        </p>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+
+            <!-- SALVAR -->
+
+            <div class="save-area">
+
+                <button
+                    type="button"
+                    class="primary-button save-button"
+                    (click)="salvarTema()"
+                >
+                    Salvar alterações
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>

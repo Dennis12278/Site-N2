@@ -1,0 +1,338 @@
+<div class="publicacoes-page">
+
+    <!-- =========================================
+         MENU LATERAL
+    ========================================== -->
+
+    <app-sidebar></app-sidebar>
+
+
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================== -->
+
+    <main class="publicacoes-content">
+
+
+        <!-- =====================================
+             VISUALIZAÇÃO DA PUBLICAÇÃO
+        ====================================== -->
+
+        <div
+            class="visualizacao-publicacao"
+            *ngIf="publicacaoSelecionada"
+        >
+
+            <div class="visualizacao-cabecalho">
+
+                <button
+                    type="button"
+                    class="botao-voltar"
+                    (click)="voltarParaPublicacoes()"
+                >
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Voltar
+
+                </button>
+
+            </div>
+
+
+            <div class="visualizacao-card">
+
+                <div class="visualizacao-capa">
+
+                    <i class="bi bi-book"></i>
+
+                </div>
+
+
+                <div class="visualizacao-info">
+
+                    <h1>
+                        {{ publicacaoSelecionada.titulo }}
+                    </h1>
+
+
+                    <div class="visualizacao-meta">
+
+                        <span>
+
+                            <i class="bi bi-eye"></i>
+
+                            {{ publicacaoSelecionada.visibilidade }}
+
+                        </span>
+
+
+                        <span
+                            *ngIf="publicacaoSelecionada.dataPublicacao"
+                        >
+
+                            <i class="bi bi-calendar3"></i>
+
+                            {{ publicacaoSelecionada.dataPublicacao | date:'dd/MM/yyyy HH:mm' }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="visualizacao-conteudo">
+
+                        <h2>
+                            Descrição
+                        </h2>
+
+                        <p>
+                            {{ publicacaoSelecionada.conteudo }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             LISTAGEM DAS PUBLICAÇÕES
+        ====================================== -->
+
+        <div
+            *ngIf="!publicacaoSelecionada"
+        >
+
+            <!-- =====================================
+                 CABEÇALHO
+            ====================================== -->
+
+            <div class="cabecalho-publicacoes">
+
+                <div>
+
+                    <h1>
+                        Minhas Publicações
+                    </h1>
+
+                    <p>
+                        Gerencie os conteúdos que você publicou no DREAM.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="botao-publicar"
+                    type="button"
+                    (click)="criarPublicacao()"
+                >
+
+                    <i class="bi bi-plus-lg"></i>
+
+                    Criar publicação
+
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 ABAS
+            ====================================== -->
+
+            <div class="abas">
+
+                <button
+                    type="button"
+                    class="aba ativa"
+                >
+
+                    Publicações
+
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 FILTROS
+            ====================================== -->
+
+            <div class="filtros">
+
+
+                <!-- PESQUISA -->
+
+                <div class="campo-pesquisa">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Pesquisar minhas publicações..."
+                    >
+
+                </div>
+
+
+                <!-- TIPO -->
+
+                <select
+                    [(ngModel)]="tipoSelecionado"
+                    (change)="abrirTipo()"
+                >
+
+                    <option value="Todos">
+                        Todos os tipos
+                    </option>
+
+                    <option value="PDF">
+                        PDF
+                    </option>
+
+                    <option value="Resumo">
+                        Resumo
+                    </option>
+
+                    <option value="Anotação">
+                        Anotação
+                    </option>
+
+                </select>
+
+
+                <!-- STATUS -->
+
+                <select
+                    [(ngModel)]="statusSelecionado"
+                    (change)="abrirStatus()"
+                >
+
+                    <option value="Todos">
+                        Todos os status
+                    </option>
+
+                    <option value="Público">
+                        Público
+                    </option>
+
+                    <option value="Privado">
+                        Privado
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =====================================
+                 ÁREA DAS PUBLICAÇÕES
+            ====================================== -->
+
+            <div class="lista-publicacoes">
+
+
+                <!-- PUBLICAÇÃO -->
+
+                                <div
+                    class="publicacao-card"
+                    *ngFor="let publicacao of publicacoes"
+                    (click)="abrirPublicacao(publicacao)"
+                >
+
+                    <div class="publicacao-icone">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                    </div>
+
+
+                    <div class="publicacao-info">
+
+                        <h2>
+                            {{ publicacao.titulo }}
+                        </h2>
+
+                        <p>
+                            {{ publicacao.conteudo }}
+                        </p>
+
+                        <span>
+                            {{ publicacao.visibilidade }}
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="botao-editar-card"
+                        title="Editar publicação"
+                        (click)="editarPublicacao(publicacao, $event)"
+                    >
+
+                        <i class="bi bi-pencil"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="botao-excluir-card"
+                        title="Excluir publicação"
+                        [disabled]="excluindo"
+                        (click)="excluirPublicacao(publicacao, $event)"
+                    >
+
+                        <i class="bi bi-trash"></i>
+
+                    </button>
+
+
+                    <div class="publicacao-seta">
+
+                        <i class="bi bi-chevron-right"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NENHUMA PUBLICAÇÃO -->
+
+                <div
+                    class="conteudo-vazio"
+                    *ngIf="publicacoes.length === 0"
+                >
+
+                    <div class="icone-vazio">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Nenhuma publicação
+                    </h2>
+
+
+                    <p>
+                        Seus PDFs, resumos e anotações aparecerão aqui.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

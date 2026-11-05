@@ -1,0 +1,399 @@
+<div class="profile-page">
+
+    <!-- =========================
+         CABEÇALHO DO PERFIL
+    ========================== -->
+
+    <section class="profile-header">
+
+        <!-- AVATAR DO USUÁRIO -->
+        <label class="profile-avatar">
+
+            <input type="file" accept="image/*" (change)="selecionarAvatar($event)">
+
+            @if (avatarUrl) {
+
+            <img [src]="avatarUrl" alt="Avatar do usuário" class="profile-avatar-image">
+
+            } @else {
+
+            <span class="profile-avatar-default">
+                <i class="bi bi-person-fill"></i>
+            </span>
+
+            }
+
+            <span class="profile-avatar-overlay">
+                <i class="bi bi-camera-fill"></i>
+            </span>
+
+        </label>
+
+
+        <!-- NOME DO USUÁRIO -->
+        <div class="profile-name">
+
+            <h1>Usuário</h1>
+
+            <span>@usuario</span>
+
+        </div>
+
+
+        <!-- ESTATÍSTICAS -->
+        <div class="profile-stats">
+
+            <div class="stat">
+                <strong>0</strong>
+                <span>Títulos</span>
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                <span>Grupos</span>
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                <span>Atividades</span>
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                <span>Comentários</span>
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                <span>Coleções</span>
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                <span>Curtidas</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTEÚDO DO PERFIL
+    ========================== -->
+
+    <div class="profile-content">
+
+
+        <!-- =========================
+             MENU LATERAL
+        ========================== -->
+
+        <app-sidebar></app-sidebar>
+
+        <!-- =========================
+             ÁREA PRINCIPAL
+        ========================== -->
+
+        <main class="profile-main">
+
+            <div class="page-title">
+
+                <h2>Meu Perfil</h2>
+
+                <p>
+                    Gerencie suas informações e personalize seu perfil.
+                </p>
+
+            </div>
+
+
+            <!-- CARD -->
+
+            <section class="profile-card">
+
+
+                <!-- =========================
+                     AVATAR
+                ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-info">
+
+                        <h3>Avatar</h3>
+
+                        <p>
+                            Escolha uma imagem para representar seu perfil.
+                        </p>
+
+                    </div>
+
+
+                    <div class="avatar-edit-container">
+
+                        <label class="avatar-preview">
+
+                            <input
+                                type="file"
+                                accept="image/*"
+                                (change)="selecionarAvatar($event)">
+
+                            @if (avatarUrl) {
+
+                            <img
+                                [src]="avatarUrl"
+                                alt="Avatar do usuário"
+                                class="avatar-image">
+
+                            } @else {
+
+                            <span class="avatar-default">
+
+                                <i class="bi bi-person-fill"></i>
+
+                            </span>
+
+                            }
+
+                            <span class="avatar-overlay">
+
+                                <i class="bi bi-camera-fill"></i>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     IDENTIDADE
+                ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-info">
+
+                        <h3>Identidade</h3>
+
+                        <p>
+                            Essas informações aparecerão no seu perfil.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-fields two-columns">
+
+                        <div class="input-group">
+
+                            <label>
+                                Nome de exibição
+                            </label>
+
+                            <input
+                                type="text"
+                                value="Usuário">
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>
+                                Nome de usuário
+                            </label>
+
+                            <input
+                                type="text"
+                                value="@usuario">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     BIOGRAFIA
+                ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-info">
+
+                        <h3>Biografia</h3>
+
+                        <p>
+                            Conte um pouco sobre você.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-fields">
+
+                        <div class="input-group">
+
+                            <label>
+                                Sobre você
+                            </label>
+
+                            <textarea
+                                placeholder="Conte um pouco sobre você..."></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     LINKS
+                ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-info">
+
+                        <h3>Links sociais</h3>
+
+                        <p>
+                            Adicione links para suas redes sociais.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-fields">
+
+                        <div class="input-group">
+
+                            <label>
+                                Links
+                            </label>
+
+                            <textarea
+                                placeholder="https://exemplo.com"></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     EMAIL
+                ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-info">
+
+                        <h3>E-mail</h3>
+
+                        <p>
+                            Seu endereço de e-mail.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-fields">
+
+                        <div class="input-group">
+
+                            <label>
+                                Endereço de e-mail
+                            </label>
+
+                            <input
+                                type="email"
+                                value="usuario@email.com">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     SENHA
+                ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-info">
+
+                        <h3>Senha</h3>
+
+                        <p>
+                            Altere sua senha, se necessário.
+                        </p>
+
+                    </div>
+
+
+                    <div class="form-fields two-columns">
+
+                        <div class="input-group">
+
+                            <label>
+                                Nova senha
+                            </label>
+
+                            <input
+                                type="password"
+                                placeholder="••••••••">
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>
+                                Confirmar nova senha
+                            </label>
+
+                            <input
+                                type="password"
+                                placeholder="••••••••">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     SALVAR
+                ========================== -->
+
+                <div class="save-area">
+
+                    <button
+                        type="button"
+                        class="save-button">
+
+                        Salvar alterações
+
+                    </button>
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>

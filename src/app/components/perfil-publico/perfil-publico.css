@@ -1,0 +1,106 @@
+.perfil-publico-page {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    background: #20272b;
+    color: #ffffff;
+}
+
+.perfil-publico-content {
+    flex: 1;
+    padding: 45px;
+}
+
+.page-title {
+    margin-bottom: 30px;
+}
+
+.page-title h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.page-title p {
+    margin: 0;
+    color: #aebbc2;
+    font-size: 16px;
+}
+
+.perfil-publico-card {
+    max-width: 900px;
+    padding: 35px;
+    background: #272f34;
+    border-radius: 12px;
+    border: 1px solid #354148;
+}
+
+.perfil-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.perfil-avatar span {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #5b9db4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 55px;
+    color: #ffffff;
+}
+
+.perfil-info {
+    text-align: center;
+}
+
+.perfil-info h2 {
+    margin: 0 0 5px;
+    font-size: 26px;
+}
+
+.perfil-info span {
+    color: #70c9df;
+}
+
+.perfil-info p {
+    margin-top: 20px;
+    color: #aebbc2;
+}
+
+.perfil-estatisticas {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #3a454b;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.perfil-estatisticas div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.perfil-estatisticas strong {
+    font-size: 22px;
+}
+
+.perfil-estatisticas span {
+    color: #aebbc2;
+}
+
+@media (max-width: 700px) {
+
+    .perfil-publico-content {
+        padding: 25px;
+    }
+
+    .perfil-estatisticas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}

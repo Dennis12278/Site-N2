@@ -1,0 +1,282 @@
+<div class="nova-colecao-page">
+
+    <main class="nova-colecao-content">
+
+        <div class="cabecalho">
+
+            <button
+                type="button"
+                class="botao-voltar"
+                (click)="voltar()"
+            >
+                <i class="bi bi-arrow-left"></i>
+                Voltar
+            </button>
+
+            <div class="titulo-area">
+
+                <h1>
+                    {{ modoEdicao ? 'Editar coleção' : 'Nova coleção' }}
+                </h1>
+
+                <p>
+                    {{ modoEdicao ? 'Altere os dados e os títulos da coleção.' : 'Crie uma coleção para organizar seus títulos.' }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="conteudo-criacao">
+
+
+            <!-- INFORMAÇÕES DA COLEÇÃO -->
+
+            <section class="cartao informacoes">
+
+                <div class="aviso">
+
+                    <div class="aviso-titulo">
+                        <span>NOTICE</span>
+                    </div>
+
+                    <p>
+                        Dê à sua coleção um nome claro e descritivo
+                        para facilitar a identificação dos títulos.
+                    </p>
+
+                    <p>
+                        Uma boa descrição ajuda outras pessoas a
+                        entenderem o objetivo da coleção.
+                    </p>
+
+                </div>
+
+
+                <div class="secao">
+
+                    <h2>
+                        Básico
+                    </h2>
+
+
+                    <div class="campo">
+
+                        <label for="nome">
+                            Nome *
+                        </label>
+
+                        <input
+                            id="nome"
+                            type="text"
+                            [(ngModel)]="nome"
+                            placeholder="Ex.: Meus títulos"
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="descricao">
+                            Descrição
+                        </label>
+
+                        <textarea
+                            id="descricao"
+                            [(ngModel)]="descricao"
+                            placeholder="Opcional — sobre o que é esta coleção?"
+                            rows="5"
+                        ></textarea>
+
+                        <span class="contador">
+                            {{ descricao.length }} / 1000
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="secao">
+
+                    <h2>
+                        Visibilidade
+                    </h2>
+
+                    <div class="visibilidade">
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="visibilidade"
+                                value="publica"
+                                [(ngModel)]="visibilidade"
+                            >
+
+                            <span>
+                                Pública
+                            </span>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="visibilidade"
+                                value="privada"
+                                [(ngModel)]="visibilidade"
+                            >
+
+                            <span>
+                                Privada
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="acoes">
+
+                    <button
+                        type="button"
+                        class="botao-cancelar"
+                        (click)="cancelar()"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="botao-criar"
+                        (click)="criarColecao()"
+                    >
+                        {{ salvando ? 'Salvando...' : (modoEdicao ? 'Salvar alterações' : 'Criar coleção') }}
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ITENS -->
+
+            <section class="cartao itens">
+
+                <div class="itens-cabecalho">
+
+                    <h2>
+                        Itens
+                    </h2>
+
+                    <p>
+                        Pesquise títulos para adicionar à coleção.
+                    </p>
+
+                </div>
+
+
+                <div class="pesquisa">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="pesquisa"
+                        placeholder="Pesquisar títulos..."
+                    >
+
+                </div>
+
+
+                <div class="area-itens">
+
+                    <div class="resultados" *ngIf="pesquisa.trim() !== '' && resultadosPesquisa.length > 0">
+
+                        <div class="resultado-item" *ngFor="let p of resultadosPesquisa">
+
+                            <div class="miniatura">
+                                <img *ngIf="p.capa" [src]="urlCapa(p.capa)" [alt]="p.titulo">
+                                <i *ngIf="!p.capa" class="bi bi-book"></i>
+                            </div>
+
+                            <div class="texto-item">
+                                <strong>{{ p.titulo }}</strong>
+                                <span>{{ tempoAtras(p.dataPublicacao) }}</span>
+                            </div>
+
+                            <button type="button" class="botao-adicionar" (click)="adicionarItem(p)" title="Adicionar">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <p class="sem-resultado" *ngIf="pesquisa.trim() !== '' && resultadosPesquisa.length === 0">
+                        Nenhum título encontrado.
+                    </p>
+
+                    <div class="lista-itens" *ngIf="itens.length > 0">
+
+                        <div class="item-lista" *ngFor="let item of itens; let i = index">
+
+                            <span class="numero-item">{{ i + 1 }}</span>
+
+                            <div class="miniatura">
+                                <img *ngIf="item.capa" [src]="urlCapa(item.capa)" [alt]="item.titulo">
+                                <i *ngIf="!item.capa" class="bi bi-book"></i>
+                            </div>
+
+                            <div class="texto-item">
+                                <strong>{{ item.titulo }}</strong>
+                                <span>{{ tempoAtras(item.dataPublicacao) }}</span>
+                            </div>
+
+                            <div class="acoes-item">
+                                <button type="button" (click)="moverItem(i, -1)" [disabled]="i === 0" title="Subir">
+                                    <i class="bi bi-chevron-up"></i>
+                                </button>
+                                <button type="button" (click)="moverItem(i, 1)" [disabled]="i === itens.length - 1" title="Descer">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <button type="button" (click)="removerItem(i)" title="Remover">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="itens-vazio" *ngIf="itens.length === 0 && pesquisa.trim() === ''">
+
+                        <i class="bi bi-collection"></i>
+
+                        <span>
+                            Nenhum item adicionado ainda.
+                        </span>
+
+                        <small>
+                            Pesquise acima para adicionar títulos.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>

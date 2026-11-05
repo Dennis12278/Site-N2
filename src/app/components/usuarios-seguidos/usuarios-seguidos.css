@@ -1,0 +1,696 @@
+/* =========================================
+   PÁGINA
+========================================= */
+
+.usuarios-page {
+    width: 100%;
+    min-height: calc(100vh - 90px);
+
+    display: flex;
+
+    background: #20272b;
+
+    color: #e8edf0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   MENU LATERAL
+========================================= */
+
+.profile-sidebar {
+    width: 350px;
+    min-width: 350px;
+
+    min-height: calc(100vh - 90px);
+
+    padding: 35px 25px 35px 48px;
+
+    box-sizing: border-box;
+
+    background: #20272b;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/* =========================================
+   ITEM DO MENU
+========================================= */
+
+.sidebar-item {
+    width: 323px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #aebbc2;
+
+    padding: 0 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+
+    font-size: 18px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+
+.sidebar-item i {
+    width: 24px;
+
+    font-size: 20px;
+
+    text-align: center;
+
+    color: #aebbc2;
+
+    transition: color .2s ease;
+}
+
+
+.sidebar-item:hover {
+    background: #2b353a;
+
+    color: #70c9df;
+}
+
+
+.sidebar-item:hover i {
+    color: #70c9df;
+}
+
+
+/* =========================================
+   ITEM ATIVO
+========================================= */
+
+.sidebar-item.active {
+    background: #3a474e;
+
+    color: #ffffff;
+}
+
+
+.sidebar-item.active i {
+    color: #70c9df;
+}
+
+
+.sidebar-item.active:hover {
+    background: #3a474e;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.usuarios-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 45px 45px 60px 38px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   TOPO
+========================================= */
+
+.usuarios-topo {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 28px;
+}
+
+
+.titulo-area {
+    min-width: 0;
+}
+
+
+.usuarios-topo h1 {
+    margin: 0 0 7px;
+
+    color: #ffffff;
+
+    font-size: 25px;
+
+    font-weight: 600;
+}
+
+
+.usuarios-topo p {
+    margin: 0;
+
+    color: #718087;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   AÇÕES
+========================================= */
+
+.acoes {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   PESQUISA
+========================================= */
+
+.pesquisa {
+    width: 285px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    background: #252e33;
+
+    border: 1px solid #303a40;
+
+    border-radius: 6px;
+}
+
+
+.pesquisa i {
+    color: #718087;
+
+    font-size: 16px;
+}
+
+
+.pesquisa input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #e9edef;
+
+    font-size: 13px;
+}
+
+
+.pesquisa input::placeholder {
+    color: #66737a;
+}
+
+
+.pesquisa:focus-within {
+    border-color: #70c9df;
+}
+
+
+/* =========================================
+   ORDENAÇÃO
+========================================= */
+
+.ordenacao {
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #252e33;
+
+    border: 1px solid #303a40;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+
+.ordenacao button {
+    height: 100%;
+
+    border: none;
+
+    padding: 0 16px;
+
+    background: transparent;
+
+    color: #87939a;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+
+.ordenacao button:hover {
+    background: #2b353a;
+
+    color: #70c9df;
+}
+
+
+.ordenacao button.active {
+    background: #303a40;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   LISTA
+========================================= */
+
+.usuarios-lista {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   CARD DO USUÁRIO
+========================================= */
+
+.usuario-card {
+    width: 100%;
+
+    min-height: 112px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 20px 28px;
+
+    box-sizing: border-box;
+
+    background: #252e33;
+
+    border: 1px solid #303a40;
+
+    border-radius: 6px;
+
+    transition: background .2s ease;
+}
+
+
+.usuario-card:hover {
+    background: #293237;
+}
+
+
+/* =========================================
+   AVATAR
+========================================= */
+
+.usuario-avatar {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #354047;
+
+    color: #70c9df;
+
+    font-size: 24px;
+}
+
+
+.usuario-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   INFORMAÇÕES
+========================================= */
+
+.usuario-info {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================================
+   NOME
+========================================= */
+
+.usuario-nome {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 8px;
+}
+
+
+.usuario-nome strong {
+    color: #dce2e5;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+.usuario-nome span {
+    color: #718087;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   DETALHES
+========================================= */
+
+.usuario-detalhes {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #718087;
+
+    font-size: 12px;
+}
+
+
+.usuario-detalhes span {
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   DEIXAR DE SEGUIR
+========================================= */
+
+.deixar-seguir {
+    flex-shrink: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #aebbc2;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    padding: 10px;
+
+    transition: color .2s ease;
+}
+
+
+.deixar-seguir:hover {
+    color: #70c9df;
+}
+
+
+/* =========================================
+   NENHUM USUÁRIO
+========================================= */
+
+.nenhum-usuario {
+    width: 100%;
+
+    min-height: 185px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background: #252e33;
+
+    border: 1px solid #303a40;
+
+    border-radius: 6px;
+}
+
+
+/* =========================================
+   ÍCONE
+========================================= */
+
+.nenhum-icone {
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #303a40;
+
+    color: #70c9df;
+
+    font-size: 20px;
+}
+
+
+/* =========================================
+   TEXTO VAZIO
+========================================= */
+
+.nenhum-usuario h2 {
+    margin: 0 0 7px;
+
+    color: #e9edef;
+
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+
+.nenhum-usuario p {
+    margin: 0;
+
+    color: #7f8b92;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .profile-sidebar {
+        width: 280px;
+
+        min-width: 280px;
+
+        padding-left: 25px;
+    }
+
+
+    .sidebar-item {
+        width: 100%;
+
+        font-size: 16px;
+    }
+
+
+    .usuarios-topo {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .acoes {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .usuarios-page {
+        flex-direction: column;
+    }
+
+
+    .profile-sidebar {
+        width: 100%;
+
+        min-width: 0;
+
+        min-height: auto;
+
+        padding: 15px;
+
+        flex-direction: row;
+
+        overflow-x: auto;
+    }
+
+
+    .sidebar-item {
+        width: auto;
+
+        min-width: 170px;
+    }
+
+
+    .usuarios-content {
+        padding: 30px 20px;
+    }
+
+
+    .acoes {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .pesquisa {
+        width: 100%;
+    }
+
+
+    .ordenacao {
+        width: fit-content;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .usuarios-content {
+        padding: 20px 15px;
+    }
+
+
+    .usuario-card {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+
+        padding: 18px;
+    }
+
+
+    .usuario-info {
+        padding-top: 4px;
+    }
+
+
+    .deixar-seguir {
+        margin-left: 76px;
+    }
+
+
+    .usuario-nome {
+        flex-wrap: wrap;
+
+        gap: 5px 10px;
+    }
+
+
+    .usuario-detalhes {
+        flex-wrap: wrap;
+    }
+
+}

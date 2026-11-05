@@ -1,0 +1,121 @@
+<div class="detalhe-page">
+
+    <main class="detalhe-content">
+
+        <div class="carregando" *ngIf="carregando">Carregando...</div>
+
+        <div class="nao-encontrada" *ngIf="!carregando && naoEncontrada">
+            <i class="bi bi-collection"></i>
+            <h2>Coleção não encontrada</h2>
+            <p>Ela pode ser privada ou ter sido excluída.</p>
+            <button type="button" class="botao-voltar" (click)="voltar()">Voltar para Home</button>
+        </div>
+
+        <ng-container *ngIf="colecao && !carregando">
+
+            <!-- MIGALHAS -->
+
+            <nav class="migalhas">
+                <a (click)="voltar()">HOME</a>
+                <span>/</span>
+                <a (click)="voltar()">COLEÇÕES DE USUÁRIOS</a>
+                <span>/</span>
+                <b>{{ colecao.titulo | uppercase }}</b>
+            </nav>
+
+            <!-- DONO -->
+
+            <section class="dono">
+
+                <div class="avatar">{{ inicialDono }}</div>
+
+                <div class="dono-info">
+
+                    <strong>{{ colecao.nomeUsuario }}</strong>
+
+                    <span class="meta">
+                        <i class="bi" [ngClass]="colecao.visibilidade === 'publica' ? 'bi-globe' : 'bi-lock'"></i>
+                        {{ colecao.visibilidade === 'publica' ? 'Pública' : 'Privada' }}
+                        · {{ colecao.itens.length }} {{ colecao.itens.length === 1 ? 'título' : 'títulos' }}
+                        · Criada {{ tempoAtras(colecao.dataCriacao) }}
+                    </span>
+
+                </div>
+
+            </section>
+
+            <!-- TÍTULO E DESCRIÇÃO -->
+
+            <h1 class="titulo">{{ colecao.titulo }}</h1>
+
+            <p class="descricao" *ngIf="colecao.descricao">{{ colecao.descricao }}</p>
+
+            <!-- AÇÕES -->
+
+            <div class="acoes">
+
+                <button
+                    type="button"
+                    class="botao-curtir"
+                    [class.ativo]="colecao.curtiu"
+                    [disabled]="curtindo"
+                    (click)="curtir()"
+                >
+                    <i class="bi" [ngClass]="colecao.curtiu ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'"></i>
+                    {{ colecao.curtidas }}
+                </button>
+
+                <button
+                    type="button"
+                    class="botao-editar"
+                    *ngIf="souDono"
+                    (click)="editar()"
+                >
+                    <i class="bi bi-pencil"></i>
+                    Editar coleção
+                </button>
+
+            </div>
+
+            <!-- CONTAGEM -->
+
+            <div class="contagem">
+                <strong>{{ colecao.itens.length }}</strong>
+                {{ colecao.itens.length === 1 ? 'item' : 'itens' }}
+            </div>
+
+            <!-- GRADE DE TÍTULOS -->
+
+            <div class="vazio" *ngIf="colecao.itens.length === 0">
+                Esta coleção ainda não tem títulos.
+            </div>
+
+            <div class="grade" *ngIf="colecao.itens.length > 0">
+
+                <article
+                    class="card"
+                    *ngFor="let item of colecao.itens; let i = index"
+                    (click)="abrirItem(item)"
+                >
+
+                    <div class="capa">
+                        <img *ngIf="item.capa" [src]="urlCapa(item.capa)" [alt]="item.titulo">
+                        <i *ngIf="!item.capa" class="bi bi-book"></i>
+                    </div>
+
+                    <div class="linha-info">
+                        <span>#{{ i + 1 }}</span>
+                        <span>{{ tempoAtras(item.dataPublicacao) }}</span>
+                    </div>
+
+                    <h3>{{ item.titulo }}</h3>
+
+                </article>
+
+            </div>
+
+        </ng-container>
+
+    </main>
+
+</div>

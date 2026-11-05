@@ -1,0 +1,187 @@
+<div class="usuarios-page">
+
+  <!-- MENU LATERAL -->
+
+  <app-sidebar></app-sidebar>
+
+  <!-- CONTEÚDO -->
+
+  <main class="usuarios-content">
+
+    <!-- TOPO -->
+
+    <div class="usuarios-topo">
+
+      <div class="titulo-area">
+
+        <h1>
+          Usuários Seguidos
+        </h1>
+
+        <p>
+          {{ usuarios.length }}
+          {{ usuarios.length === 1
+            ? 'usuário que você segue.'
+            : 'usuários que você segue.'
+          }}
+        </p>
+
+      </div>
+
+
+      <!-- AÇÕES -->
+
+      <div class="acoes">
+
+        <!-- PESQUISA -->
+
+        <div class="pesquisa">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            placeholder="Pesquisar usuários"
+            [(ngModel)]="pesquisa"
+          >
+
+        </div>
+
+
+        <!-- ORDENAÇÃO -->
+
+        <div class="ordenacao">
+
+          <button
+            type="button"
+            [class.active]="ordenacao === 'Recentes'"
+            (click)="selecionarOrdenacao('Recentes')"
+          >
+            Recentes
+          </button>
+
+          <button
+            type="button"
+            [class.active]="ordenacao === 'A-Z'"
+            (click)="selecionarOrdenacao('A-Z')"
+          >
+            A-Z
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- LISTA DE USUÁRIOS -->
+
+    <section
+      class="usuarios-lista"
+      *ngIf="usuariosFiltrados.length > 0"
+    >
+
+      <div
+        class="usuario-card"
+        *ngFor="let usuario of usuariosFiltrados"
+      >
+
+        <!-- AVATAR -->
+
+        <div class="usuario-avatar">
+
+          <img
+            *ngIf="usuario.avatar"
+            [src]="usuario.avatar"
+            [alt]="usuario.nome"
+          >
+
+          <i
+            *ngIf="!usuario.avatar"
+            class="bi bi-person-fill"
+          ></i>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="usuario-info">
+
+          <div class="usuario-nome">
+
+            <strong>
+              {{ usuario.nome }}
+            </strong>
+
+            <span>
+              {{ usuario.usuario }}
+            </span>
+
+          </div>
+
+
+          <!-- DETALHES -->
+
+          <div class="usuario-detalhes">
+
+            <span>
+              {{ usuario.publicacoes }}
+              {{ usuario.publicacoes === 1
+                ? 'publicação'
+                : 'publicações'
+              }}
+            </span>
+
+            <span>·</span>
+
+            <span>
+              Seguindo há {{ usuario.seguidoHa }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- DEIXAR DE SEGUIR -->
+
+        <button
+          type="button"
+          class="deixar-seguir"
+          (click)="deixarDeSeguir(usuario)"
+        >
+          Deixar de seguir
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- NENHUM USUÁRIO -->
+
+    <section
+      class="nenhum-usuario"
+      *ngIf="usuariosFiltrados.length === 0"
+    >
+
+      <div class="nenhum-icone">
+        <i class="bi bi-person-plus"></i>
+      </div>
+
+      <h2>
+        Você ainda não segue nenhum usuário.
+      </h2>
+
+      <p>
+        Visite o perfil de um usuário e comece a seguir.
+      </p>
+
+    </section>
+
+  </main>
+
+</div>
+

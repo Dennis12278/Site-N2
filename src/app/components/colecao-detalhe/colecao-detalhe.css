@@ -1,0 +1,266 @@
+.detalhe-page {
+    min-height: 100vh;
+    background: #1f282d;
+    color: #ffffff;
+}
+
+.detalhe-content {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 40px 60px;
+    box-sizing: border-box;
+}
+
+.carregando,
+.nao-encontrada {
+    text-align: center;
+    color: #8195a2;
+    padding: 60px 20px;
+}
+
+.nao-encontrada i {
+    font-size: 48px;
+    color: #536269;
+}
+
+.nao-encontrada h2 {
+    color: #ffffff;
+    margin: 10px 0 6px;
+    font-size: 18px;
+}
+
+.nao-encontrada p {
+    margin: 0 0 16px;
+    font-size: 13px;
+}
+
+.botao-voltar {
+    height: 36px;
+    padding: 0 16px;
+    background: #29343a;
+    border: 1px solid #39464d;
+    border-radius: 7px;
+    color: #cdd6da;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* ---------- migalhas ---------- */
+
+.migalhas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #68767d;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+}
+
+.migalhas a {
+    cursor: pointer;
+}
+
+.migalhas a:hover {
+    color: #cdd6da;
+}
+
+.migalhas b {
+    color: #9aa7ac;
+    font-weight: 600;
+}
+
+/* ---------- dono ---------- */
+
+.dono {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #6b2e2e;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.dono-info strong {
+    display: block;
+    font-size: 13px;
+}
+
+.meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #8195a2;
+    font-size: 11px;
+}
+
+/* ---------- título e descrição ---------- */
+
+.titulo {
+    margin: 0 0 12px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.descricao {
+    margin: 0 0 20px;
+    color: #aebbc0;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+/* ---------- ações ---------- */
+
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+}
+
+.acoes button {
+    height: 36px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 7px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-curtir {
+    background: #29343a;
+    border: 1px solid #39464d;
+    color: #cdd6da;
+}
+
+.botao-curtir:hover {
+    border-color: #5fd3ee;
+    color: #ffffff;
+}
+
+.botao-curtir.ativo {
+    border-color: #5fd3ee;
+    color: #5fd3ee;
+}
+
+.botao-curtir:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.botao-editar {
+    background: #5fd3ee;
+    border: 1px solid #5fd3ee;
+    color: #152126;
+    font-weight: 700;
+}
+
+.botao-editar:hover {
+    background: #72d9f1;
+}
+
+/* ---------- contagem e grade ---------- */
+
+.contagem {
+    margin-bottom: 18px;
+    color: #8195a2;
+    font-size: 12px;
+}
+
+.contagem strong {
+    color: #cdd6da;
+    margin-right: 4px;
+}
+
+.vazio {
+    color: #8195a2;
+    font-size: 13px;
+    padding: 30px 0;
+}
+
+.grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 22px 18px;
+}
+
+.card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.capa {
+    height: 218px;
+    background: #29343a;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.card:hover .capa {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.capa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.capa i {
+    font-size: 34px;
+    color: #536269;
+}
+
+.linha-info {
+    display: flex;
+    justify-content: space-between;
+    color: #7f8d93;
+    font-size: 10px;
+    font-family: monospace;
+}
+
+.card h3 {
+    margin: 2px 0 0;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width: 760px) {
+    .detalhe-content {
+        padding: 20px 18px 40px;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+}

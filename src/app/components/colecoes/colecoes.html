@@ -1,0 +1,189 @@
+<div class="colecoes-page">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="colecoes-content">
+
+        <!-- CABEÇALHO -->
+
+        <div class="topo">
+
+            <div>
+                <h1>Coleções</h1>
+                <p>Agrupe títulos nas suas coleções ou veja as que você curtiu.</p>
+            </div>
+
+            <button type="button" class="botao-nova" (click)="abrirNovaColecao()">
+                <i class="bi bi-plus-lg"></i>
+                Nova coleção
+            </button>
+
+        </div>
+
+
+        <!-- ABAS -->
+
+        <div class="abas">
+
+            <button
+                type="button"
+                [class.ativa]="abaAtiva === 'meu'"
+                (click)="selecionarAba('meu')"
+            >
+                Minhas
+            </button>
+
+            <button
+                type="button"
+                [class.ativa]="abaAtiva === 'curtido'"
+                (click)="selecionarAba('curtido')"
+            >
+                Curtidas
+            </button>
+
+        </div>
+
+
+        <!-- FILTROS -->
+
+        <div class="filtros">
+
+            <div class="campo-filtro pesquisa">
+
+                <label>Pesquisar</label>
+
+                <div class="entrada">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Pesquisar coleções..." [(ngModel)]="pesquisando">
+                </div>
+
+            </div>
+
+            <div class="campo-filtro">
+
+                <label>Tipo</label>
+
+                <select [(ngModel)]="tipoSelecionado">
+                    <option value="Todos">Qualquer</option>
+                    <option value="Pública">Pública</option>
+                    <option value="Privada">Privada</option>
+                </select>
+
+            </div>
+
+            <div class="campo-filtro">
+
+                <label>Ordenar por</label>
+
+                <select [(ngModel)]="ordenacaoSelecionada">
+                    <option>Mais recentes</option>
+                    <option>Mais antigas</option>
+                    <option>Título</option>
+                </select>
+
+            </div>
+
+            <button type="button" class="botao-redefinir" (click)="redefinirFiltros()">
+                <i class="bi bi-arrow-counterclockwise"></i>
+                Redefinir
+            </button>
+
+        </div>
+
+        <div class="contagem">
+            {{ colecoesFiltradas.length }}
+            {{ colecoesFiltradas.length === 1 ? 'coleção' : 'coleções' }}
+        </div>
+
+
+        <!-- LISTA DE COLEÇÕES -->
+
+        <div class="lista" *ngIf="colecoesFiltradas.length > 0">
+
+            <article
+                class="cartao"
+                *ngFor="let colecao of colecoesFiltradas"
+                (click)="abrirColecao(colecao)"
+            >
+
+                <div class="cartao-topo">
+
+                    <h3>{{ colecao.titulo }}</h3>
+
+                    <button
+                        type="button"
+                        class="botao-excluir"
+                        title="Excluir coleção"
+                        (click)="$event.stopPropagation(); excluirColecao(colecao)"
+                    >
+                        <i class="bi bi-trash"></i>
+                    </button>
+
+                </div>
+
+                <div class="meta">
+
+                    <span>
+                        <i class="bi" [ngClass]="colecao.tipo === 'Privada' ? 'bi-lock' : 'bi-globe'"></i>
+                        {{ colecao.tipo }}
+                    </span>
+
+                    <span>·</span>
+
+                    <span>{{ colecao.quantidadeTitulos }} {{ colecao.quantidadeTitulos === 1 ? 'título' : 'títulos' }}</span>
+
+                    <span>·</span>
+
+                    <span>
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        {{ colecao.curtidas ?? 0 }}
+                    </span>
+
+                    <span>·</span>
+
+                    <span>Criada {{ colecao.criadoHa }}</span>
+
+                    <span>·</span>
+
+                    <span>Atualizada {{ colecao.atualizadoHa }}</span>
+
+                </div>
+
+                <p class="descricao" *ngIf="colecao.descricao">
+                    {{ colecao.descricao }}
+                </p>
+
+                <div class="capas">
+
+                    <div class="capa" *ngFor="let capa of colecao.capas">
+                        <img [src]="capa" alt="">
+                    </div>
+
+                    <div class="capa vazia" *ngIf="colecao.capas.length === 0">
+                        <i class="bi bi-book"></i>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- VAZIO -->
+
+        <div class="vazio" *ngIf="colecoesFiltradas.length === 0">
+
+            <i class="bi bi-collection"></i>
+
+            <h2 *ngIf="abaAtiva === 'meu'">Nenhuma coleção ainda</h2>
+            <h2 *ngIf="abaAtiva === 'curtido'">Nenhuma coleção curtida ainda</h2>
+
+            <p *ngIf="abaAtiva === 'meu'">Crie sua primeira coleção para agrupar títulos.</p>
+            <p *ngIf="abaAtiva === 'curtido'">Curta coleções de outros usuários para vê-las aqui.</p>
+
+        </div>
+
+    </main>
+
+</div>

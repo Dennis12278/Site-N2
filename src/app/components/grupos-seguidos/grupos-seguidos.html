@@ -1,0 +1,154 @@
+<div class="grupos-page">
+
+
+  <!-- =========================================
+       MENU LATERAL
+  ========================================= -->
+
+  <app-sidebar></app-sidebar>
+
+
+  <!-- =========================================
+       CONTEÚDO
+  ========================================= -->
+
+  <main class="grupos-content">
+
+
+    <!-- =========================================
+         TOPO
+    ========================================= -->
+
+    <div class="grupos-topo">
+
+      <div class="titulo-area">
+
+        <h1>
+          Grupos Seguidos
+        </h1>
+
+        <p>
+          {{ grupos.length }}
+          {{
+            grupos.length === 1
+              ? 'grupo que você segue.'
+              : 'grupos que você segue.'
+          }}
+        </p>
+
+      </div>
+
+
+      <div class="acoes">
+
+        <div class="pesquisa">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            placeholder="Pesquisar grupos"
+            [(ngModel)]="pesquisa"
+          >
+
+        </div>
+
+
+        <div class="ordenacao">
+
+          <button
+            type="button"
+            [class.active]="ordenacao === 'Recentes'"
+            (click)="selecionarOrdenacao('Recentes')"
+          >
+            Recentes
+          </button>
+
+          <button
+            type="button"
+            [class.active]="ordenacao === 'A-Z'"
+            (click)="selecionarOrdenacao('A-Z')"
+          >
+            A-Z
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         LISTA DE GRUPOS
+    ========================================= -->
+
+    <section
+      class="grupos-lista"
+      *ngIf="gruposFiltrados.length > 0"
+    >
+
+      <div
+        class="grupo-card"
+        *ngFor="let grupo of gruposFiltrados"
+      >
+
+        <div class="grupo-avatar">
+          {{ grupo.iniciais }}
+        </div>
+
+        <div class="grupo-info">
+
+          <div class="grupo-nome">
+            <strong>
+              {{ grupo.nome }}
+            </strong>
+          </div>
+
+          <div class="grupo-detalhes">
+            <span>
+              {{ grupo.descricao || 'Sem descrição' }}
+            </span>
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="deixar-seguir"
+          (click)="deixarDeSeguir(grupo)"
+        >
+          Deixar de seguir
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         NENHUM GRUPO
+    ========================================= -->
+
+    <section
+      class="nenhum-grupo"
+      *ngIf="gruposFiltrados.length === 0"
+    >
+
+      <div class="nenhum-icone">
+        <i class="bi bi-people"></i>
+      </div>
+
+      <h2>
+        Você ainda não segue nenhum grupo.
+      </h2>
+
+      <p>
+        Visite um grupo e comece a seguir.
+      </p>
+
+    </section>
+
+  </main>
+
+</div>

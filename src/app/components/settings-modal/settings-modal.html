@@ -1,0 +1,100 @@
+<div class="overlay">
+
+    <div class="modal">
+
+        <div class="cabecalho">
+
+            <div>
+
+                <h2>Configurações</h2>
+
+                <p>
+                    Salvo neste dispositivo. Não é necessário criar uma conta.
+                </p>
+
+            </div>
+
+            <button
+                class="btn-fechar"
+                (click)="fechar.emit()">
+
+                <i class="bi bi-x-lg"></i>
+
+            </button>
+
+        </div>
+
+        <div class="linha"></div>
+
+        <div class="secao">
+
+            <span class="titulo">
+                TEMA
+            </span>
+
+            <div class="tema">
+
+                <button
+                    class="tema-btn"
+                    [class.ativo]="temaSelecionado === 'principal'"
+                    (click)="selecionarTema('principal')">
+
+                    <i class="bi bi-stars"></i>
+
+                    <span>Principal</span>
+
+                </button>
+
+                <button
+                    class="tema-btn"
+                    [class.ativo]="temaSelecionado === 'escuro'"
+                    (click)="selecionarTema('escuro')">
+
+                    <i class="bi bi-moon-stars"></i>
+
+                    <span>Escuro</span>
+
+                </button>
+
+                <button
+                    class="tema-btn"
+                    [class.ativo]="temaSelecionado === 'luz'"
+                    (click)="selecionarTema('luz')">
+
+                    <i class="bi bi-sun"></i>
+
+                    <span>Luz</span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="conteudo-vazio">
+
+            <!-- Futuramente ficará o filtro -->
+
+        </div>
+
+        <div class="linha"></div>
+
+        <div class="rodape">
+
+            <button class="restaurar">
+
+                Restaurar padrões de fábrica
+
+            </button>
+
+            <button class="feito">
+
+                Feito
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

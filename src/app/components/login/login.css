@@ -1,0 +1,108 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1f282d;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    padding: 34px 30px;
+    background: #29343a;
+    border: 1px solid #34434b;
+    border-radius: 12px;
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+.login-topo {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.login-topo i {
+    font-size: 34px;
+    color: #58d8f2;
+}
+
+.login-topo h1 {
+    margin: 8px 0 4px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.login-topo p {
+    margin: 0;
+    color: #8195a2;
+    font-size: 13px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.campo-login {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo-login label {
+    color: #dce3e6;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.campo-login input {
+    height: 42px;
+    padding: 0 13px;
+    background: #273238;
+    border: 1px solid #39464d;
+    border-radius: 7px;
+    color: #ffffff;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.campo-login input:focus {
+    border-color: #5fd3ee;
+}
+
+.erro-login {
+    margin: 0;
+    color: #e08a8a;
+    font-size: 12px;
+}
+
+.botao-login {
+    height: 42px;
+    background: #5fd3ee;
+    border: 1px solid #5fd3ee;
+    border-radius: 7px;
+    color: #152126;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.botao-login:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.botao-alternar {
+    width: 100%;
+    margin-top: 18px;
+    background: transparent;
+    border: none;
+    color: #58d8f2;
+    font-size: 12px;
+    cursor: pointer;
+}

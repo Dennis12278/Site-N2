@@ -1,0 +1,449 @@
+.publicacoes-page {
+    display: flex;
+
+    width: 100%;
+    min-height: calc(100vh - 90px);
+
+    background: #20272b;
+}
+
+.publicacoes-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 35px 45px 50px 25px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho-publicacoes {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.cabecalho-publicacoes h1 {
+
+    margin: 0 0 6px;
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    font-weight: 600;
+
+}
+
+
+.cabecalho-publicacoes p {
+
+    margin: 0;
+
+    color: #8da1ae;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================
+   BOTÃO PUBLICAR
+========================================= */
+
+.botao-publicar {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    padding: 10px 15px;
+
+    background: #58d8f2;
+
+    color: #142126;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+
+.botao-publicar:hover {
+
+    opacity: 0.9;
+
+}
+
+
+/* =========================================
+   ABAS
+========================================= */
+
+.abas {
+
+    display: flex;
+
+    gap: 25px;
+
+    border-bottom: 1px solid #344148;
+
+    margin-bottom: 18px;
+
+}
+
+
+.aba {
+
+    border: none;
+
+    background: transparent;
+
+    padding: 10px 5px;
+
+    color: #8195a2;
+
+    cursor: pointer;
+
+}
+
+
+.aba.ativa {
+
+    color: #ffffff;
+
+    border-bottom: 2px solid #58d8f2;
+
+}
+
+
+/* =========================================
+   FILTROS
+========================================= */
+
+.filtros {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.campo-pesquisa {
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #29343a;
+
+    border: 1px solid #34434a;
+
+    border-radius: 5px;
+
+    padding: 0 12px;
+
+}
+
+
+.campo-pesquisa i {
+
+    color: #738894;
+
+}
+
+
+.campo-pesquisa input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    padding: 11px 10px;
+
+    color: #ffffff;
+
+}
+
+
+.campo-pesquisa input::placeholder {
+
+    color: #70838e;
+
+}
+
+
+.filtros select {
+
+    min-width: 150px;
+
+    border: 1px solid #34434a;
+
+    border-radius: 5px;
+
+    background: #29343a;
+
+    color: #c8d4da;
+
+    padding: 10px;
+
+    outline: none;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================
+   LISTA
+========================================= */
+
+.lista-publicacoes {
+
+    width: 100%;
+
+}
+
+
+.conteudo-vazio {
+
+    min-height: 260px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #29343a;
+
+    border-radius: 6px;
+
+    text-align: center;
+
+}
+
+
+.icone-vazio {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #34434b;
+
+    border-radius: 50%;
+
+    margin-bottom: 15px;
+
+}
+
+
+.icone-vazio i {
+
+    color: #58d8f2;
+
+    font-size: 23px;
+
+}
+
+
+.conteudo-vazio h2 {
+
+    margin: 0 0 8px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+}
+
+
+.conteudo-vazio p {
+
+    margin: 0;
+
+    color: #8195a2;
+
+    font-size: 13px;
+
+}
+
+.publicacao-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: #29343a;
+    border: 1px solid #34434b;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.publicacao-card:hover {
+    background: #2f3d44;
+    border-color: #58d8f2;
+}
+
+.publicacao-icone {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #34434b;
+    border-radius: 8px;
+}
+
+.publicacao-icone i {
+    color: #58d8f2;
+    font-size: 20px;
+}
+
+.publicacao-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.publicacao-info h2 {
+    margin: 0 0 4px;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.publicacao-info p {
+    margin: 0 0 6px;
+    color: #8195a2;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.publicacao-info span {
+    color: #58d8f2;
+    font-size: 11px;
+}
+
+.publicacao-seta {
+    color: #8195a2;
+}
+
+.botao-excluir-card {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid #5a3a3a;
+    border-radius: 7px;
+    color: #e08a8a;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-excluir-card:hover {
+    background: #3a2424;
+    border-color: #e08a8a;
+    color: #ffffff;
+}
+
+.botao-excluir-card:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.botao-editar-card {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid #34505a;
+    border-radius: 7px;
+    color: #58d8f2;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-editar-card:hover {
+    background: #243a42;
+    border-color: #58d8f2;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 700px) {
+
+    .publicacoes-page {
+
+        flex-direction: column;
+
+    }
+
+
+    .filtros {
+
+        flex-direction: column;
+
+    }
+
+
+    .filtros select {
+
+        width: 100%;
+
+    }
+
+}

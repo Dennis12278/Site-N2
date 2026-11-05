@@ -1,0 +1,86 @@
+<header class="header">
+
+    <!-- LOGO -->
+    <div
+        class="logo"
+        (click)="irParaInicio()"
+    >
+        <img
+            src="/logo-dream.png"
+            alt="DREAM"
+        >
+    </div>
+
+
+    <!-- PESQUISA -->
+    <div class="search">
+
+        <i class="bi bi-search"></i>
+
+        <input
+            type="text"
+            placeholder="Pesquise qualquer título..."
+        >
+
+        <button type="button">
+            Navegar
+        </button>
+
+    </div>
+
+
+    <!-- MENU -->
+    <div class="menu">
+
+    <!-- CALENDÁRIO -->
+<i
+    class="bi bi-calendar3"
+    title="Calendário"
+    (click)="irParaCalendario()"
+></i>
+
+        <!-- MENU -->
+        <i class="bi bi-list"></i>
+
+        <!-- NOTIFICAÇÕES -->
+        <i class="bi bi-bell"></i>
+
+
+        <!-- AVATAR -->
+        <div
+            class="perfil"
+            (click)="toggleUserMenu($event)"
+        >
+
+            <!-- ÍCONE PADRÃO -->
+            <i class="bi bi-person-fill"></i>
+
+
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================
+     FUNDO PARA FECHAR O MENU
+========================================= -->
+
+<div
+    class="menu-overlay"
+    *ngIf="userMenuOpen"
+    (click)="fecharUserMenu()"
+></div>
+
+
+<!-- =========================================
+     MENU DO USUÁRIO
+========================================= -->
+
+<app-user-menu
+    *ngIf="userMenuOpen"
+    (click)="$event.stopPropagation()"
+    (fecharMenu)="fecharUserMenu()"
+></app-user-menu>
