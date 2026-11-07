@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar';
+import { ApiService } from '../../services/api.service';
+import { SessaoService } from '../../services/sessao.service';
 
-interface Titulo {
+interface TituloSeguido {
+  id: number;
   titulo: string;
-  status: string;
-  capa: string;
-  ultimaLeitura: Date;
+  capa: string | null;
+  marcador: string;
+  dataPublicacao: string | null;
 }
 
 @Component({
@@ -22,273 +25,155 @@ interface Titulo {
   templateUrl: './titulos-seguidos.html',
   styleUrl: './titulos-seguidos.css'
 })
-export class TitulosSeguidos {
+export class TitulosSeguidos implements OnInit {
 
-  filtroAtual = 'Todos';
+  titulos: TituloSeguido[] = [];
 
-  ordenacaoAtual = 'Adicionados recentemente';
+  carregando = false;
+
+  abaAtiva = 'todos';
 
   pesquisa = '';
 
-  constructor(private router: Router) {}
+  ordenacao = 'recentes';
 
-
-  // =========================================
-  // NAVEGAÇÃO DO MENU LATERAL
-  // =========================================
-
-  irParaMeuPerfil(): void {
-    this.router.navigate(['/meu-perfil']);
-  }
-
-
-  irParaTitulosSeguidos(): void {
-    this.router.navigate(['/titulos-seguidos']);
-  }
-
-
-  irParaMinhasPublicacoes(): void {
-    this.router.navigate(['/minhas-publicacoes']);
-  }
-
-
-  irParaConfiguracoes(): void {
-    this.router.navigate(['/configuracoes']);
-  }
-
-
-  // =========================================
-  // ABRIR TÍTULO
-  // =========================================
-
-  abrirTitulo(titulo: Titulo): void {
-
-    console.log('Título selecionado:', titulo.titulo);
-
-  }
-
-
-  // =========================================
-  // SEGUIR TÍTULO
-  // =========================================
-
-  seguirTitulo(titulo: Titulo): void {
-
-    console.log('Seguindo título:', titulo.titulo);
-
-  }
-
-
-  // =========================================
-  // ADICIONAR À COLEÇÃO
-  // =========================================
-
-  adicionarColecao(titulo: Titulo): void {
-
-    console.log('Adicionar à coleção:', titulo.titulo);
-
-  }
-
-
-  // =========================================
-  // TÍTULOS
-  // =========================================
-
-  titulos: Titulo[] = [
-
-    {
-      titulo: 'Título de exemplo',
-      status: 'Lendo',
-      capa: '/capas/titulo-exemplo.jpg',
-      ultimaLeitura: new Date()
-    },
-
-    {
-      titulo: 'Outro título',
-      status: 'Planejo ler',
-      capa: '/capas/outro-titulo.jpg',
-      ultimaLeitura: new Date(
-        Date.now() - 2 * 60 * 60 * 1000
-      )
-    },
-
-    {
-      titulo: 'Meu terceiro título',
-      status: 'Concluídos',
-      capa: '/capas/meu-terceiro-titulo.jpg',
-      ultimaLeitura: new Date(
-        Date.now() - 3 * 24 * 60 * 60 * 1000
-      )
-    },
-
-    {
-      titulo: 'História do Brasil',
-      status: 'Em espera',
-      capa: '/capas/historia-brasil.jpg',
-      ultimaLeitura: new Date(
-        Date.now() - 2 * 30 * 24 * 60 * 60 * 1000
-      )
-    },
-
-    {
-      titulo: 'Biologia',
-      status: 'Abandonados',
-      capa: '/capas/biologia.jpg',
-      ultimaLeitura: new Date(
-        Date.now() - 2 * 365 * 24 * 60 * 60 * 1000
-      )
-    }
-
+  readonly abas = [
+    { valor: 'todos', texto: 'Todos' },
+    { valor: 'lendo', texto: 'Lendo' },
+    { valor: 'quero-ler', texto: 'Quero ler' },
+    { valor: 'concluido', texto: 'Concluído' },
+    { valor: 'pausado', texto: 'Em pausa' },
+    { valor: 'abandonado', texto: 'Abandonado' }
   ];
 
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+  }
 
-  // =========================================
-  // FILTRO
-  // =========================================
+  ngOnInit(): void {
+    this.carregar();
+  }
 
-  selecionarFiltro(filtro: string): void {
+  carregar(): void {
 
-    this.filtroAtual = filtro;
+    const usuario = SessaoService.usuario();
+
+    if (!usuario) {
+      return;
+    }
+
+    this.carregando = true;
+
+    this.apiService.listarTitulosSeguidos(usuario.id).subscribe({
+
+      next: itens => {
+
+        this.titulos = itens.map(item => ({
+          id: item.id,
+          titulo: item.titulo,
+          capa: item.capa ?? null,
+          marcador: item.marcador,
+          dataPublicacao: item.dataPublicacao ?? null
+        }));
+
+        this.carregando = false;
+        this.changeDetectorRef.detectChanges();
+
+      },
+
+      error: erro => {
+
+        console.error('Erro ao buscar títulos seguidos:', erro);
+
+        this.carregando = false;
+        this.changeDetectorRef.detectChanges();
+
+      }
+
+    });
 
   }
 
+  contar(valor: string): number {
 
-  // =========================================
-  // ORDENAÇÃO
-  // =========================================
+    if (valor === 'todos') {
+      return this.titulos.length;
+    }
 
-  selecionarOrdenacao(ordenacao: string): void {
-
-    this.ordenacaoAtual = ordenacao;
+    return this.titulos.filter(t => t.marcador === valor).length;
 
   }
 
+  nomeMarcador(valor: string): string {
 
-  // =========================================
-  // TÍTULOS FILTRADOS
-  // =========================================
+    const aba = this.abas.find(a => a.valor === valor);
 
-  get titulosFiltrados(): Titulo[] {
-
-    let resultado = [...this.titulos];
-
-
-    // FILTRO POR STATUS
-
-    if (this.filtroAtual !== 'Todos') {
-
-      resultado = resultado.filter(
-        titulo => titulo.status === this.filtroAtual
-      );
-
-    }
-
-
-    // PESQUISA
-
-    if (this.pesquisa.trim() !== '') {
-
-      const texto = this.pesquisa.toLowerCase();
-
-      resultado = resultado.filter(
-        titulo =>
-          titulo.titulo
-            .toLowerCase()
-            .includes(texto)
-      );
-
-    }
-
-
-    // ORDENAÇÃO
-
-    if (this.ordenacaoAtual === 'Lidos recentemente') {
-
-      resultado.sort(
-        (a, b) =>
-          b.ultimaLeitura.getTime() -
-          a.ultimaLeitura.getTime()
-      );
-
-    }
-
-    return resultado;
+    return aba ? aba.texto : valor;
 
   }
 
+  get titulosFiltrados(): TituloSeguido[] {
 
-  // =========================================
-  // TEMPO DESDE A LEITURA
-  // =========================================
+    let lista = [...this.titulos];
 
-  tempoDesdeLeitura(data: Date): string {
-
-    const agora = new Date();
-
-    const diferenca =
-      agora.getTime() - data.getTime();
-
-
-    const segundos =
-      Math.floor(diferenca / 1000);
-
-
-    if (segundos < 60) {
-
-      return `Lido há ${segundos} segundo${segundos === 1 ? '' : 's'}`;
-
+    if (this.abaAtiva !== 'todos') {
+      lista = lista.filter(t => t.marcador === this.abaAtiva);
     }
 
+    const texto = this.pesquisa.trim().toLowerCase();
 
-    const minutos =
-      Math.floor(segundos / 60);
+    if (texto !== '') {
+      lista = lista.filter(t => t.titulo.toLowerCase().includes(texto));
+    }
 
+    if (this.ordenacao === 'titulo') {
+      lista.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }
+
+    return lista;
+
+  }
+
+  selecionarAba(valor: string): void {
+    this.abaAtiva = valor;
+  }
+
+  abrirTitulo(titulo: TituloSeguido): void {
+    this.router.navigate(['/publicacao', titulo.id]);
+  }
+
+  urlCapa(capa: string | null): string {
+    return this.apiService.urlCapa(capa);
+  }
+
+  tempoAtras(data: string | null): string {
+
+    if (!data) {
+      return '';
+    }
+
+    const minutos = Math.floor((Date.now() - new Date(data).getTime()) / 60000);
+
+    if (minutos < 1) {
+      return 'agora';
+    }
 
     if (minutos < 60) {
-
-      return `Lido há ${minutos} minuto${minutos === 1 ? '' : 's'}`;
-
+      return minutos + (minutos === 1 ? ' minuto atrás' : ' minutos atrás');
     }
 
-
-    const horas =
-      Math.floor(minutos / 60);
-
+    const horas = Math.floor(minutos / 60);
 
     if (horas < 24) {
-
-      return `Lido há ${horas} hora${horas === 1 ? '' : 's'}`;
-
+      return horas + (horas === 1 ? ' hora atrás' : ' horas atrás');
     }
 
+    const dias = Math.floor(horas / 24);
 
-    const dias =
-      Math.floor(horas / 24);
-
-
-    if (dias < 30) {
-
-      return `Lido há ${dias} dia${dias === 1 ? '' : 's'}`;
-
-    }
-
-
-    const meses =
-      Math.floor(dias / 30);
-
-
-    if (meses < 12) {
-
-      return `Lido há ${meses} ${meses === 1 ? 'mês' : 'meses'}`;
-
-    }
-
-
-    const anos =
-      Math.floor(meses / 12);
-
-
-    return `Lido há ${anos} ano${anos === 1 ? '' : 's'}`;
+    return dias + (dias === 1 ? ' dia atrás' : ' dias atrás');
 
   }
 

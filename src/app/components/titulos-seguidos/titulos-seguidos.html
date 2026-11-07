@@ -1,291 +1,94 @@
 <div class="titulos-page">
 
-    <!-- =========================================
-         MENU LATERAL
-    ========================================== -->
-
     <app-sidebar></app-sidebar>
-
-
-    <!-- =========================================
-         CONTEÚDO PRINCIPAL
-    ========================================== -->
 
     <main class="titulos-content">
 
+        <div class="topo">
 
-        <!-- =====================================
-             CABEÇALHO
-        ====================================== -->
+            <h1>Títulos seguidos</h1>
 
-        <div class="page-title">
+            <p>Títulos que você marcou como lendo, para ler ou concluídos.</p>
 
-            <div>
+        </div>
 
-                <h1>
-                    Títulos Seguidos
-                </h1>
 
-                <p>
-                    {{ titulos.length }} títulos na sua biblioteca.
-                </p>
+        <!-- ABAS -->
 
-            </div>
-
+        <div class="abas">
 
             <button
                 type="button"
-                class="editar-pastas"
+                *ngFor="let aba of abas"
+                [class.ativa]="abaAtiva === aba.valor"
+                (click)="selecionarAba(aba.valor)"
             >
-
-                <i class="bi bi-pencil"></i>
-
-                Editar pastas
-
+                {{ aba.texto }}
+                <span class="contador">{{ contar(aba.valor) }}</span>
             </button>
 
         </div>
 
 
-        <!-- =====================================
-             STATUS
-        ====================================== -->
+        <!-- FILTROS -->
 
-        <div class="status-tabs">
+        <div class="filtros">
 
-            <button
-                type="button"
-                class="status-tab"
-                [class.active]="filtroAtual === 'Todos'"
-                (click)="selecionarFiltro('Todos')"
-            >
-                Todos
-            </button>
-
-
-            <button
-                type="button"
-                class="status-tab"
-                [class.active]="filtroAtual === 'Lendo'"
-                (click)="selecionarFiltro('Lendo')"
-            >
-                Lendo
-            </button>
-
-
-            <button
-                type="button"
-                class="status-tab"
-                [class.active]="filtroAtual === 'Concluídos'"
-                (click)="selecionarFiltro('Concluídos')"
-            >
-                Concluídos
-            </button>
-
-
-            <button
-                type="button"
-                class="status-tab"
-                [class.active]="filtroAtual === 'Em espera'"
-                (click)="selecionarFiltro('Em espera')"
-            >
-                Em espera
-            </button>
-
-
-            <button
-                type="button"
-                class="status-tab"
-                [class.active]="filtroAtual === 'Planejo ler'"
-                (click)="selecionarFiltro('Planejo ler')"
-            >
-                Planejo ler
-            </button>
-
-
-            <button
-                type="button"
-                class="status-tab"
-                [class.active]="filtroAtual === 'Abandonados'"
-                (click)="selecionarFiltro('Abandonados')"
-            >
-                Abandonados
-            </button>
-
-        </div>
-
-
-        <!-- =====================================
-             PESQUISA
-        ====================================== -->
-
-        <div class="search-area">
-
-            <div class="search-box">
-
+            <div class="entrada">
                 <i class="bi bi-search"></i>
-
-                <input
-                    type="text"
-                    placeholder="Pesquisar na sua biblioteca..."
-                    [(ngModel)]="pesquisa"
-                >
-
+                <input type="text" placeholder="Pesquisar títulos..." [(ngModel)]="pesquisa">
             </div>
 
-
-            <button
-                type="button"
-                class="filter-button"
-            >
-
-                <i class="bi bi-sliders"></i>
-
-                Filtros avançados
-
-            </button>
+            <select [(ngModel)]="ordenacao">
+                <option value="recentes">Mais recentes</option>
+                <option value="titulo">Título</option>
+            </select>
 
         </div>
 
-
-        <!-- =====================================
-             ORDENAÇÃO E VISUALIZAÇÃO
-        ====================================== -->
-
-        <div class="ordenacao">
-
-            <div class="ordenacao-esquerda">
-
-                <button
-                    type="button"
-                    class="ordenacao-button"
-                    [class.active]="ordenacaoAtual === 'Adicionados recentemente'"
-                    (click)="selecionarOrdenacao('Adicionados recentemente')"
-                >
-
-                    <i class="bi bi-arrow-down-short"></i>
-
-                    Adicionados recentemente
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="ordenacao-button"
-                    [class.active]="ordenacaoAtual === 'Lidos recentemente'"
-                    (click)="selecionarOrdenacao('Lidos recentemente')"
-                >
-
-                    Lidos recentemente
-
-                </button>
-
-            </div>
-
-
-            <div class="visualizacao">
-
-                <button
-                    type="button"
-                    class="visualizacao-button active"
-                >
-
-                    <i class="bi bi-grid-3x3-gap"></i>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="visualizacao-button"
-                >
-
-                    <i class="bi bi-list"></i>
-
-                </button>
-
-            </div>
-
+        <div class="contagem">
+            {{ titulosFiltrados.length }}
+            {{ titulosFiltrados.length === 1 ? 'título' : 'títulos' }}
         </div>
 
 
-        <!-- =====================================
-             TÍTULOS
-        ====================================== -->
+        <!-- GRADE -->
 
-        <section class="titulos-grid">
-
-
-            <!-- =================================
-                 CARDS DINÂMICOS
-            ================================== -->
+        <div class="grade" *ngIf="titulosFiltrados.length > 0">
 
             <article
-                class="titulo-card"
+                class="card"
                 *ngFor="let titulo of titulosFiltrados"
+                (click)="abrirTitulo(titulo)"
             >
 
-
-                <!-- CAPA -->
-
-                <div
-                    class="titulo-capa"
-                    (click)="abrirTitulo(titulo)"
-                >
-
-                    <img
-                        [src]="titulo.capa"
-                        [alt]="'Capa de ' + titulo.titulo"
-                    >
-
+                <div class="capa">
+                    <img *ngIf="titulo.capa" [src]="urlCapa(titulo.capa)" [alt]="titulo.titulo">
+                    <i *ngIf="!titulo.capa" class="bi bi-book"></i>
+                    <span class="marcador">{{ nomeMarcador(titulo.marcador) }}</span>
                 </div>
 
+                <h3>{{ titulo.titulo }}</h3>
 
-                <!-- INFORMAÇÕES -->
-
-                <div class="titulo-info">
-
-                    <h2>
-                        {{ titulo.titulo }}
-                    </h2>
-
-
-                    <span
-                        class="titulo-leitura"
-                        *ngIf="ordenacaoAtual === 'Lidos recentemente'"
-                    >
-                        {{ tempoDesdeLeitura(titulo.ultimaLeitura) }}
-                    </span>
-
-                </div>
-
+                <span class="tempo">{{ tempoAtras(titulo.dataPublicacao) }}</span>
 
             </article>
 
-
-            <!-- =================================
-                 SEM RESULTADOS
-            ================================== -->
-
-            <div
-                class="sem-resultados"
-                *ngIf="titulosFiltrados.length === 0"
-            >
-
-                <i class="bi bi-book"></i>
-
-                <p>
-                    Nenhum título encontrado.
-                </p>
-
-            </div>
+        </div>
 
 
-        </section>
+        <!-- VAZIO -->
 
+        <div class="vazio" *ngIf="!carregando && titulosFiltrados.length === 0">
+
+            <i class="bi bi-bookmark"></i>
+
+            <h2>Nenhum título aqui ainda</h2>
+
+            <p>Abra uma publicação e use o botão Seguir para marcar um título.</p>
+
+        </div>
 
     </main>
-
 
 </div>

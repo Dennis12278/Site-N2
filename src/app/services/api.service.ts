@@ -161,6 +161,10 @@ export class ApiService {
      MARCADORES DE PUBLICAÇÃO
   ========================================= */
 
+  listarTitulosSeguidos(idUsuario: number) {
+    return this.http.get<any[]>(this.apiUrl + '/MarcadorPublicacao/Lista?idUsuario=' + idUsuario);
+  }
+
   obterMarcador(idUsuario: number, idDocumento: number) {
     return this.http.get<{ marcador: string }>(this.apiUrl + '/MarcadorPublicacao?idUsuario=' + idUsuario + '&idDocumento=' + idDocumento);
   }
