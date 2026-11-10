@@ -217,6 +217,13 @@ export class ApiService {
     return this.http.get<any[]>(this.apiUrl + '/HistoricoLeitura?idUsuario=' + idUsuario);
   }
 
+  atualizarProgressoLeitura(idUsuario: number, idDocumento: number, progresso: number) {
+    return this.http.put(
+      this.apiUrl + '/HistoricoLeitura/Progresso?idUsuario=' + idUsuario + '&idDocumento=' + idDocumento + '&progresso=' + progresso,
+      {}
+    );
+  }
+
   registrarLeitura(idUsuario: number, idDocumento: number) {
     return this.http.post(this.apiUrl + '/HistoricoLeitura/Registrar?idUsuario=' + idUsuario + '&idDocumento=' + idDocumento, {});
   }

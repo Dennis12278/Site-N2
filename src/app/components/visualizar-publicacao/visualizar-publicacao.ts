@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,7 +28,19 @@ interface ColecaoOpcao {
   templateUrl: './visualizar-publicacao.html',
   styleUrl: './visualizar-publicacao.css'
 })
-export class VisualizarPublicacao implements OnInit {
+export class VisualizarPublicacao implements OnInit, OnDestroy {
+
+  // ===== PROGRESSO DE LEITURA =====
+
+  // maior porcentagem já alcançada nesta abertura da publicação
+  private progressoAtual = 0;
+
+  // última porcentagem enviada à API (evita enviar a mesma coisa várias vezes)
+  private progressoEnviado = 0;
+
+  private timerProgresso: any = null;
+
+  private timerPaginaCurta: any = null;
 
   publicacao: any = null;
 
@@ -91,6 +103,7 @@ export class VisualizarPublicacao implements OnInit {
         this.carregando = false;
 
         this.registrarLeitura(publicacao.id);
+        this.iniciarEnvioProgresso(publicacao.id);
         this.carregarMarcador(publicacao.id);
 
         this.changeDetectorRef.detectChanges();
@@ -360,6 +373,82 @@ export class VisualizarPublicacao implements OnInit {
   /* =========================================
      NAVEGAÇÃO
   ========================================= */
+
+  /* =========================================
+     PROGRESSO DE LEITURA (rolagem da página)
+  ========================================= */
+
+  @HostListener('window:scroll')
+  aoRolar(): void {
+
+    const alturaTotal = document.documentElement.scrollHeight;
+    const alturaVisivel = window.innerHeight;
+    const rolado = window.scrollY;
+
+    // página cabe na tela: conta como lida após alguns segundos
+    if (alturaTotal <= alturaVisivel) {
+      return;
+    }
+
+    const porcentagem = Math.round((rolado + alturaVisivel) / alturaTotal * 100);
+
+    if (porcentagem > this.progressoAtual) {
+      this.progressoAtual = Math.min(porcentagem, 100);
+    }
+
+  }
+
+  // envia o progresso a cada 10 segundos, se mudou
+  private iniciarEnvioProgresso(idDocumento: number): void {
+
+    this.timerProgresso = setInterval(() => {
+      this.enviarProgresso(idDocumento);
+    }, 10000);
+
+    // se a página couber na tela, conta como lida depois de 8 segundos aberta
+    this.timerPaginaCurta = setTimeout(() => {
+      const alturaTotal = document.documentElement.scrollHeight;
+
+      if (alturaTotal <= window.innerHeight) {
+        this.progressoAtual = 100;
+        this.enviarProgresso(idDocumento);
+      }
+    }, 8000);
+
+  }
+
+  private enviarProgresso(idDocumento: number): void {
+
+    const usuario = SessaoService.usuario();
+
+    if (!usuario || this.progressoAtual <= this.progressoEnviado) {
+      return;
+    }
+
+    this.progressoEnviado = this.progressoAtual;
+
+    this.apiService.atualizarProgressoLeitura(usuario.id, idDocumento, this.progressoAtual).subscribe({
+      error: erro => console.error('Erro ao salvar progresso:', erro)
+    });
+
+  }
+
+  ngOnDestroy(): void {
+
+    if (this.timerProgresso) {
+      clearInterval(this.timerProgresso);
+    }
+
+    if (this.timerPaginaCurta) {
+      clearTimeout(this.timerPaginaCurta);
+    }
+
+    // salva o que foi lido antes de sair da página
+    if (this.publicacao) {
+      this.enviarProgresso(this.publicacao.id);
+    }
+
+  }
 
   urlCapa(capa: string | null): string {
     return this.apiService.urlCapa(capa);

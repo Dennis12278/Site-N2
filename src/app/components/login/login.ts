@@ -84,9 +84,11 @@ export class Login {
     SessaoService.entrar({
       id: usuario.id,
       nome: usuario.nome,
-      email: usuario.email
+      email: usuario.email,
+      token: usuario.token
     });
 
+    this.enviando = false;
     this.router.navigate(['/']);
   }
 

@@ -2,6 +2,7 @@ export interface UsuarioSessao {
   id: number;
   nome: string;
   email: string;
+  token?: string;
 }
 
 const CHAVE = 'dream_usuario';
@@ -19,6 +20,10 @@ export class SessaoService {
 
   static idUsuario(): number {
     return SessaoService.usuario()?.id ?? 0;
+  }
+
+  static token(): string | null {
+    return SessaoService.usuario()?.token ?? null;
   }
 
   static estaLogado(): boolean {
