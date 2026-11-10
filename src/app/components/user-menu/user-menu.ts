@@ -1,21 +1,51 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 import { SessaoService, UsuarioSessao } from '../../services/sessao.service';
 
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-menu.html',
   styleUrl: './user-menu.css'
 })
-export class UserMenuComponent {
+export class UserMenuComponent implements OnInit {
 
   @Output() fecharMenu = new EventEmitter<void>();
 
   usuario: UsuarioSessao | null = SessaoService.usuario();
 
-  constructor(private router: Router) {}
+  // foto do usuário (null = mostra o ícone padrão)
+  avatarUrl: string | null = null;
+
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+
+    if (!this.usuario) {
+      return;
+    }
+
+    this.apiService.obterMeuPerfil(this.usuario.id).subscribe({
+
+      next: perfil => {
+        this.avatarUrl = perfil.avatar ?? null;
+        this.changeDetectorRef.detectChanges();
+      },
+
+      error: () => {
+        this.avatarUrl = null;
+      }
+
+    });
+
+  }
 
   // ==============================
   // FECHAR MENU

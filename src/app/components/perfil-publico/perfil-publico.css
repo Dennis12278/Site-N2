@@ -51,6 +51,16 @@
     color: #ffffff;
 }
 
+/* foto do usuário no lugar do ícone padrão */
+.perfil-avatar-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 2px solid #354148;
+}
+
 .perfil-info {
     text-align: center;
 }

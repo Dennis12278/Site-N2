@@ -6,7 +6,6 @@
 
     <section class="profile-header">
 
-        <!-- AVATAR DO USUÁRIO -->
         <label class="profile-avatar">
 
             <input type="file" accept="image/*" (change)="selecionarAvatar($event)">
@@ -30,47 +29,35 @@
         </label>
 
 
-        <!-- NOME DO USUÁRIO -->
         <div class="profile-name">
 
-            <h1>Usuário</h1>
+            <h1>{{ nome || 'Usuário' }}</h1>
 
-            <span>@usuario</span>
+            <span>{{ arroba }}</span>
 
         </div>
 
 
-        <!-- ESTATÍSTICAS -->
         <div class="profile-stats">
 
             <div class="stat">
-                <strong>0</strong>
+                <strong>{{ titulos }}</strong>
                 <span>Títulos</span>
             </div>
 
             <div class="stat">
-                <strong>0</strong>
+                <strong>{{ grupos }}</strong>
                 <span>Grupos</span>
             </div>
 
             <div class="stat">
-                <strong>0</strong>
-                <span>Atividades</span>
-            </div>
-
-            <div class="stat">
-                <strong>0</strong>
-                <span>Comentários</span>
-            </div>
-
-            <div class="stat">
-                <strong>0</strong>
+                <strong>{{ colecoes }}</strong>
                 <span>Coleções</span>
             </div>
 
             <div class="stat">
-                <strong>0</strong>
-                <span>Curtidas</span>
+                <strong>{{ publicacoes }}</strong>
+                <span>Publicações</span>
             </div>
 
         </div>
@@ -84,16 +71,7 @@
 
     <div class="profile-content">
 
-
-        <!-- =========================
-             MENU LATERAL
-        ========================== -->
-
         <app-sidebar></app-sidebar>
-
-        <!-- =========================
-             ÁREA PRINCIPAL
-        ========================== -->
 
         <main class="profile-main">
 
@@ -108,14 +86,9 @@
             </div>
 
 
-            <!-- CARD -->
-
             <section class="profile-card">
 
-
-                <!-- =========================
-                     AVATAR
-                ========================== -->
+                <!-- AVATAR -->
 
                 <div class="form-section">
 
@@ -129,37 +102,26 @@
 
                     </div>
 
-
                     <div class="avatar-edit-container">
 
                         <label class="avatar-preview">
 
-                            <input
-                                type="file"
-                                accept="image/*"
-                                (change)="selecionarAvatar($event)">
+                            <input type="file" accept="image/*" (change)="selecionarAvatar($event)">
 
                             @if (avatarUrl) {
 
-                            <img
-                                [src]="avatarUrl"
-                                alt="Avatar do usuário"
-                                class="avatar-image">
+                            <img [src]="avatarUrl" alt="Avatar do usuário" class="avatar-image">
 
                             } @else {
 
                             <span class="avatar-default">
-
                                 <i class="bi bi-person-fill"></i>
-
                             </span>
 
                             }
 
                             <span class="avatar-overlay">
-
                                 <i class="bi bi-camera-fill"></i>
-
                             </span>
 
                         </label>
@@ -169,9 +131,7 @@
                 </div>
 
 
-                <!-- =========================
-                     IDENTIDADE
-                ========================== -->
+                <!-- IDENTIDADE -->
 
                 <div class="form-section">
 
@@ -185,31 +145,13 @@
 
                     </div>
 
-
-                    <div class="form-fields two-columns">
-
-                        <div class="input-group">
-
-                            <label>
-                                Nome de exibição
-                            </label>
-
-                            <input
-                                type="text"
-                                value="Usuário">
-
-                        </div>
-
+                    <div class="form-fields">
 
                         <div class="input-group">
 
-                            <label>
-                                Nome de usuário
-                            </label>
+                            <label>Nome de exibição</label>
 
-                            <input
-                                type="text"
-                                value="@usuario">
+                            <input type="text" [(ngModel)]="nome">
 
                         </div>
 
@@ -218,9 +160,7 @@
                 </div>
 
 
-                <!-- =========================
-                     BIOGRAFIA
-                ========================== -->
+                <!-- BIOGRAFIA -->
 
                 <div class="form-section">
 
@@ -234,17 +174,16 @@
 
                     </div>
 
-
                     <div class="form-fields">
 
                         <div class="input-group">
 
-                            <label>
-                                Sobre você
-                            </label>
+                            <label>Sobre você</label>
 
                             <textarea
-                                placeholder="Conte um pouco sobre você..."></textarea>
+                                placeholder="Conte um pouco sobre você..."
+                                [(ngModel)]="biografia"
+                            ></textarea>
 
                         </div>
 
@@ -253,9 +192,7 @@
                 </div>
 
 
-                <!-- =========================
-                     LINKS
-                ========================== -->
+                <!-- LINKS -->
 
                 <div class="form-section">
 
@@ -264,22 +201,21 @@
                         <h3>Links sociais</h3>
 
                         <p>
-                            Adicione links para suas redes sociais.
+                            Adicione links para suas redes sociais, um por linha.
                         </p>
 
                     </div>
-
 
                     <div class="form-fields">
 
                         <div class="input-group">
 
-                            <label>
-                                Links
-                            </label>
+                            <label>Links</label>
 
                             <textarea
-                                placeholder="https://exemplo.com"></textarea>
+                                placeholder="https://exemplo.com"
+                                [(ngModel)]="links"
+                            ></textarea>
 
                         </div>
 
@@ -288,9 +224,7 @@
                 </div>
 
 
-                <!-- =========================
-                     EMAIL
-                ========================== -->
+                <!-- E-MAIL -->
 
                 <div class="form-section">
 
@@ -304,18 +238,13 @@
 
                     </div>
 
-
                     <div class="form-fields">
 
                         <div class="input-group">
 
-                            <label>
-                                Endereço de e-mail
-                            </label>
+                            <label>Endereço de e-mail</label>
 
-                            <input
-                                type="email"
-                                value="usuario@email.com">
+                            <input type="email" [(ngModel)]="email">
 
                         </div>
 
@@ -324,71 +253,20 @@
                 </div>
 
 
-                <!-- =========================
-                     SENHA
-                ========================== -->
-
-                <div class="form-section">
-
-                    <div class="section-info">
-
-                        <h3>Senha</h3>
-
-                        <p>
-                            Altere sua senha, se necessário.
-                        </p>
-
-                    </div>
-
-
-                    <div class="form-fields two-columns">
-
-                        <div class="input-group">
-
-                            <label>
-                                Nova senha
-                            </label>
-
-                            <input
-                                type="password"
-                                placeholder="••••••••">
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Confirmar nova senha
-                            </label>
-
-                            <input
-                                type="password"
-                                placeholder="••••••••">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     SALVAR
-                ========================== -->
+                <!-- SALVAR -->
 
                 <div class="save-area">
 
                     <button
                         type="button"
-                        class="save-button">
-
-                        Salvar alterações
-
+                        class="save-button"
+                        [disabled]="salvando"
+                        (click)="salvar()"
+                    >
+                        {{ salvando ? 'Salvando...' : 'Salvar alterações' }}
                     </button>
 
                 </div>
-
 
             </section>
 

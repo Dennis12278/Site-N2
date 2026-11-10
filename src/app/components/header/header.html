@@ -32,12 +32,12 @@
     <!-- MENU -->
     <div class="menu">
 
-    <!-- CALENDÁRIO -->
-<i
-    class="bi bi-calendar3"
-    title="Calendário"
-    (click)="irParaCalendario()"
-></i>
+        <!-- CALENDÁRIO -->
+        <i
+            class="bi bi-calendar3"
+            title="Calendário"
+            (click)="irParaCalendario()"
+        ></i>
 
         <!-- MENU -->
         <i class="bi bi-list"></i>
@@ -52,10 +52,19 @@
             (click)="toggleUserMenu($event)"
         >
 
-            <!-- ÍCONE PADRÃO -->
-            <i class="bi bi-person-fill"></i>
+            <!-- FOTO DO USUÁRIO (quando existe) -->
+            <img
+                *ngIf="avatarUrl"
+                [src]="avatarUrl"
+                alt="Avatar"
+                class="perfil-foto"
+            >
 
-
+            <!-- ÍCONE PADRÃO (quando não há foto) -->
+            <i
+                *ngIf="!avatarUrl"
+                class="bi bi-person-fill"
+            ></i>
 
         </div>
 

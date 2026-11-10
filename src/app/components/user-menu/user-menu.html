@@ -7,7 +7,19 @@
     <div class="user-header">
 
         <div class="user-avatar">
-            <i class="bi bi-person-fill"></i>
+
+            <img
+                *ngIf="avatarUrl"
+                [src]="avatarUrl"
+                alt="Avatar"
+                class="user-avatar-foto"
+            >
+
+            <i
+                *ngIf="!avatarUrl"
+                class="bi bi-person-fill"
+            ></i>
+
         </div>
 
         <div class="user-info">
@@ -24,100 +36,47 @@
 
     <div class="menu-options">
 
-        <!-- MEU PERFIL -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaMeuPerfil()"
-        >
+        <button type="button" class="user-option" (click)="irParaMeuPerfil()">
             <i class="bi bi-person"></i>
             <span>Meu Perfil</span>
         </button>
 
-
-        <!-- PERFIL PÚBLICO -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaPerfilPublico()"
-        >
+        <button type="button" class="user-option" (click)="irParaPerfilPublico()">
             <i class="bi bi-globe"></i>
             <span>Perfil Público</span>
         </button>
 
-
-        <!-- TÍTULOS SEGUIDOS -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaTitulosSeguidos()"
-        >
+        <button type="button" class="user-option" (click)="irParaTitulosSeguidos()">
             <i class="bi bi-bookmark"></i>
             <span>Títulos Seguidos</span>
         </button>
 
-
-        <!-- GRUPOS SEGUIDOS -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaGruposSeguidos()"
-        >
+        <button type="button" class="user-option" (click)="irParaGruposSeguidos()">
             <i class="bi bi-people"></i>
             <span>Grupos Seguidos</span>
         </button>
 
-
-        <!-- HISTÓRICO DE LEITURA -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaHistorico()"
-        >
+        <button type="button" class="user-option" (click)="irParaHistorico()">
             <i class="bi bi-clock-history"></i>
             <span>Histórico de Leitura</span>
         </button>
 
-
-        <!-- COLEÇÕES -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaColecoes()"
-        >
+        <button type="button" class="user-option" (click)="irParaColecoes()">
             <i class="bi bi-collection"></i>
             <span>Coleções</span>
         </button>
 
-
-        <!-- NOTIFICAÇÕES -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaNotificacoes()"
-        >
+        <button type="button" class="user-option" (click)="irParaNotificacoes()">
             <i class="bi bi-bell"></i>
             <span>Notificações</span>
         </button>
 
-
-        <!-- MINHAS PUBLICAÇÕES -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaMinhasPublicacoes()"
-        >
+        <button type="button" class="user-option" (click)="irParaMinhasPublicacoes()">
             <i class="bi bi-file-earmark-text"></i>
             <span>Minhas Publicações</span>
         </button>
 
-
-        <!-- CONFIGURAÇÕES -->
-        <button
-            type="button"
-            class="user-option"
-            (click)="irParaConfiguracoes()"
-        >
+        <button type="button" class="user-option" (click)="irParaConfiguracoes()">
             <i class="bi bi-gear"></i>
             <span>Configurações</span>
         </button>
@@ -136,11 +95,7 @@
          SAIR
     ========================================== -->
 
-    <button
-        type="button"
-        class="user-option logout"
-        (click)="sair()"
-    >
+    <button type="button" class="user-option logout" (click)="sair()">
         <i class="bi bi-box-arrow-right"></i>
         <span>Sair</span>
     </button>

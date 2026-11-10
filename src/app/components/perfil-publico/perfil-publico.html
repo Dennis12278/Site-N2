@@ -19,7 +19,14 @@
 
             <div class="perfil-avatar">
 
-                <span>
+                <img
+                    *ngIf="avatarUrl"
+                    [src]="avatarUrl"
+                    alt="Avatar"
+                    class="perfil-avatar-foto"
+                >
+
+                <span *ngIf="!avatarUrl">
                     <i class="bi bi-person-fill"></i>
                 </span>
 
@@ -28,13 +35,25 @@
 
             <div class="perfil-info">
 
-                <h2>Usuário</h2>
+                <h2>{{ nome || 'Usuário' }}</h2>
 
-                <span>@usuario</span>
+                <span>{{ arroba }}</span>
 
-                <p>
+                <p *ngIf="biografia">
+                    {{ biografia }}
+                </p>
+
+                <p *ngIf="!biografia && !carregando">
                     Este usuário ainda não adicionou uma biografia.
                 </p>
+
+                <div class="perfil-links" *ngIf="listaLinks.length > 0">
+
+                    <span *ngFor="let link of listaLinks">
+                        {{ link }}
+                    </span>
+
+                </div>
 
             </div>
 
@@ -42,23 +61,23 @@
             <div class="perfil-estatisticas">
 
                 <div>
-                    <strong>0</strong>
+                    <strong>{{ titulos }}</strong>
                     <span>Títulos</span>
                 </div>
 
                 <div>
-                    <strong>0</strong>
-                    <span>Seguidores</span>
-                </div>
-
-                <div>
-                    <strong>0</strong>
-                    <span>Seguindo</span>
-                </div>
-
-                <div>
-                    <strong>0</strong>
+                    <strong>{{ publicacoes }}</strong>
                     <span>Publicações</span>
+                </div>
+
+                <div>
+                    <strong>{{ colecoes }}</strong>
+                    <span>Coleções</span>
+                </div>
+
+                <div>
+                    <strong>{{ grupos }}</strong>
+                    <span>Grupos</span>
                 </div>
 
             </div>

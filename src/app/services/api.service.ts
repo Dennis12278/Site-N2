@@ -65,6 +65,22 @@ export class ApiService {
   }
 
   /* =========================================
+     PERFIL
+  ========================================= */
+
+  obterMeuPerfil(idUsuario: number) {
+    return this.http.get<any>(this.apiUrl + '/Perfil/' + idUsuario + '/Meu');
+  }
+
+  obterPerfilPublico(idUsuario: number) {
+    return this.http.get<any>(this.apiUrl + '/Perfil/' + idUsuario + '/Publico');
+  }
+
+  salvarPerfil(idUsuario: number, dados: { nome: string; email: string; biografia: string; links: string; avatar?: string }) {
+    return this.http.put(this.apiUrl + '/Perfil/' + idUsuario, dados);
+  }
+
+  /* =========================================
      NOTIFICAÇÕES
   ========================================= */
 
